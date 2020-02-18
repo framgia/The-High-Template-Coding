@@ -2,6 +2,7 @@ package {{cookiecutter.package_name}}.data.remote
 
 import {{cookiecutter.package_name}}.BuildConfig
 import android.content.Context
+import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
