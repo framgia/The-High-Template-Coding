@@ -7,5 +7,6 @@ target 'BaseMVVM-C' do
 
   # Pods for BaseMVVM-C
 pod 'Alamofire' 
-
+pod 'Firebase/Analytics'
+pod 'Firebase/Messaging'
 end
