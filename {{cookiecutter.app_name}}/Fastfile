@@ -1,0 +1,392 @@
+default_platform(:ios)
+
+before_all do
+	Dotenv.overload '.env.secret'
+end
+
+after_all do |lane|
+
+end
+
+{% if cookiecutter.platforms == "1" or cookiecutter.platforms == "3" %}
+           
+lane :inputNoteAndroid do |options|
+	releaseNoteInput = prompt(
+		text: "Please enter your release notes. This note will be pushed on Firebase: ",
+		multi_line_end_keyword: "END"
+		)
+	time1 = Time.new
+	time = time1.strftime("%Y-%m-%d %H:%M:%S")
+	releaseNote =   time + "   " + releaseNoteInput
+
+   #save to file
+   commit = last_git_commit
+   File.write("./temp/releaseNote.txt", releaseNote)
+   contentSave =
+   "
+  New build number has been uploaded successfully to Firebase!
+   Platform : Android
+   BuildType : #{options[:buildType]}
+   Author : #{commit[:author]}
+   Author email : #{commit[:author_email]}
+   Note : #{releaseNote}
+   "
+   File.write("./temp/content.txt", contentSave)
+end
+{% endif %}
+
+#++++++++++++++++++++++++
+{% if cookiecutter.platforms == "2" or cookiecutter.platforms == "3" %}
+lane :inputNoteIOS do |options|
+	releaseNoteInput = prompt(
+		text: "Please enter your release notes. This note will be pushed on Firebase: ",
+		multi_line_end_keyword: "END"
+		)
+	time1 = Time.new
+	time = time1.strftime("%Y-%m-%d %H:%M:%S")
+	releaseNote =   time + "   " + releaseNoteInput
+   #save to file
+   commit = last_git_commit
+   File.write("./temp/releaseNote.txt", releaseNote)
+   contentSave =
+   "
+   New build number has been uploaded successfully to Firebase!
+   Platform : IOS
+   BuildType : #{options[:buildType]}
+   Author : #{commit[:author]}
+   Author email : #{commit[:author_email]}
+   Note : #{releaseNote}
+   "
+   File.write("./temp/content.txt", contentSave)
+end
+{% endif %}
+#++++++++++++++++++++
+lane :pushChatwork do
+    	puts "------------------- Push notification to Chatwork ----------------------  "
+    	sendTo = ENV['CHATWORK_SEND_TO_TESTER']
+    	content = File.read("./temp/content.txt")
+    	chatwork(
+    		message: "#{sendTo}
+    		#{content}",
+        roomid: "#{ENV['CHATWORK_ROOM_ID']}", #change with your room id
+        success: true,
+        api_token: "#{ENV['CHATWORK_API_TOKEN']}" #api token of chatbot
+        )
+
+end
+#++++++++++++++++++++
+{% if cookiecutter.platforms == "2" or cookiecutter.platforms == "3" %}
+platform :ios do
+
+#++++++++++++++++++++
+desc "Beta Distribution develop "
+lane :develop do |options|
+
+	inputNoteIOS(
+    buildType: "develop"
+	)
+
+  #build
+  begin
+  	buildAppDevelop
+  rescue => ex
+  	UI.error(ex)
+  	next
+  end
+    #upload fabric and notify
+  begin
+    uploadFirebaseDevelop
+  rescue => ex
+    UI.error(ex)
+    next
+  end
+  #notify chatwork
+  begin
+    pushChatwork
+  rescue => ex
+    UI.error(ex)
+  end
+end
+
+lane :staging do |options|
+
+	inputNoteIOS(
+		buildType: "staging"
+		)
+
+  #build
+  begin
+  	buildAppStaging
+  rescue => ex
+  	UI.error(ex)
+  	next
+  end
+    #upload fabric and notify
+  begin
+    	uploadFirebaseStaging
+    rescue => ex
+    UI.error(ex)
+    next
+  end
+
+  #notify chatwork
+  begin
+    pushChatwork
+  rescue => ex
+    UI.error(ex)
+  end
+end
+
+lane :production do |options|
+
+  inputNoteIOS(
+    buildType: "production"
+    )
+
+  #build
+  begin
+    buildAppProduction
+  rescue => ex
+    UI.error(ex)
+    next
+  end
+    #upload fabric and notify
+  begin
+      uploadFirebaseProduction
+    rescue => ex
+    UI.error(ex)
+    next
+  end
+
+  #notify chatwork
+  begin
+    pushChatwork
+  rescue => ex
+    UI.error(ex)
+  end
+end
+
+#++++++++++++++++++++
+lane :uploadFirebaseDevelop do |options|
+  
+       releaseNote = File.read("./temp/releaseNote.txt")
+       firebase_app_distribution(
+                       app:"#{ENV['FIREBASE_IOS_APP_DEV']}" ,
+                       ipa_path: "#{ENV['BUILD_IOS_NAME']}",
+                       release_notes: "#{releaseNote}",
+                       groups:"#{ENV['FIREBASE_GROUP_TESTER']}"
+                  )
+  
+end
+
+#++++++++++++++++++++
+lane :uploadFirebaseStaging do |options|
+	releaseNote = File.read("./temp/releaseNote.txt")
+    firebase_app_distribution(
+           app:"#{ENV['FIREBASE_IOS_APP_STG']}" ,
+           ipa_path: "#{ENV['BUILD_IOS_NAME']}",
+           release_notes: "#{releaseNote}",
+           groups:"#{ENV['FIREBASE_GROUP_TESTER']}",
+         )
+end
+
+#++++++++++++++++++++
+lane :uploadFirebaseProduction do |options|
+  releaseNote = File.read("./temp/releaseNote.txt")
+    firebase_app_distribution(
+           app:"#{ENV['FIREBASE_IOS_APP_PROD']}" ,
+           ipa_path: "#{ENV['BUILD_IOS_NAME']}",
+           release_notes: "#{releaseNote}",
+           groups:"#{ENV['FIREBASE_GROUP_TESTER']}",
+         )
+end
+#++++++++++++++++++++
+lane :buildAppDevelop do
+    #build
+    gym(
+    	scheme: "#{ENV['SCHEME_NAME_IOS']}",
+    	workspace: "./ios/#{ENV['SCHEME_NAME_IOS']}.xcworkspace",
+    	output_name: "#{ENV['BUILD_IOS_NAME']}",
+    	export_method: 'enterprise',
+    	)
+end
+#++++++++++++++++++++
+
+lane :buildAppStaging do
+    #build
+    gym(
+    	scheme: "#{ENV['SCHEME_NAME_IOS']} (Staging)",
+    	workspace: "./ios/#{ENV['SCHEME_NAME_IOS']}.xcworkspace",
+    	output_name: "#{ENV['BUILD_IOS_NAME']}",
+    	export_method: 'enterprise',
+    	clean: true
+    	)
+end
+#++++++++++++++++++++
+
+lane :buildAppProduction do
+    #build
+    gym(
+      scheme: "#{ENV['SCHEME_NAME_IOS']} (Staging)",
+      workspace: "./ios/#{ENV['SCHEME_NAME_IOS']}.xcworkspace",
+      output_name: "#{ENV['BUILD_IOS_NAME']}",
+      export_method: 'enterprise',
+      clean: true
+      )
+end
+#++++++++++++++++++++
+
+end
+
+{% endif %}
+
+
+{% if cookiecutter.platforms == "1" or cookiecutter.platforms == "3" %}
+
+platform :android do
+
+desc "Beta Distribution develop"
+lane :develop do |options|
+
+	inputNoteAndroid(
+			buildType: "Develop"
+		)
+  #build
+  begin
+   	buildAppDevelop
+rescue => ex
+	UI.error(ex)
+	next
+end
+begin
+ 	uploadFirebaseDevelop
+rescue => ex
+	UI.error(ex)
+	next
+end
+begin
+	 pushChatwork
+rescue => ex
+	UI.error(ex)
+	next
+end
+end
+
+#++++++++++++++++++++
+
+lane :staging do |options|
+
+		inputNoteAndroid(
+			buildType: "Staging"
+			)
+  #build
+  begin
+  	buildAppStaging
+rescue => ex
+	UI.error(ex)
+	next
+end
+begin
+	uploadFirebaseStaging
+rescue => ex
+	UI.error(ex)
+	next
+end
+begin
+	pushChatwork
+rescue => ex
+	UI.error(ex)
+	next
+end
+end
+
+lane :production do |options|
+    inputNoteAndroid(
+      buildType: "Production"
+      )
+  #build
+  begin
+    buildAppProduction
+  rescue => ex
+   UI.error(ex)
+   next
+  end
+  begin
+   uploadFirebaseProduction
+   rescue => ex
+    UI.error(ex)
+   next
+  end
+  begin
+   pushChatwork
+   rescue => ex
+    UI.error(ex)
+   next
+  end
+end
+
+lane :buildAppDevelop do
+    #build
+    gradle(task: 'clean')
+    gradle(task: 'assemble', build_type: 'developRelease')
+end
+#++++++++++++++++++++
+
+lane :buildAppStaging do
+    #build
+    gradle(task: 'clean')
+    gradle(task: 'assemble', build_type: 'stagingRelease')
+end
+#++++++++++++++++++++
+
+lane :buildAppProduction do
+    #build
+    gradle(task: 'clean')
+    gradle(task: 'assemble', build_type: 'productionRelease')
+end
+
+lane :uploadFirebaseDevelop do
+	releaseNote = File.read("./temp/releaseNote.txt")
+	va = File.absolute_path("../app/build/outputs/apk/")
+	va2 = va+'/*/*/*.apk'
+	path = Dir[va2][0]
+	puts "------------------- APK .......... #{path}  -------"
+		firebase_app_distribution(
+                               app:"#{ENV['FIREBASE_ANDROID_APP_DEV']}" ,
+                               apk_path: path,
+                               release_notes: "#{releaseNote}",
+                               groups:"#{ENV['FIREBASE_GROUP_TESTER']}"
+                          )
+end
+
+
+
+lane :uploadFirebaseStaging do
+	releaseNote = File.read("./temp/releaseNote.txt")
+	va = File.absolute_path("../app/build/outputs/apk/")
+	va2 = va+'/*/*/*.apk'
+	path = Dir[va2][0]
+	firebase_app_distribution(
+                               app:"#{ENV['FIREBASE_ANDROID_APP_STG']}" ,
+                               apk_path: path,
+                               release_notes: "#{releaseNote}",
+                               groups:"#{ENV['GROUP_CUSTOMER']}"
+     )
+end
+
+lane :uploadFirebaseProduction do
+  releaseNote = File.read("./temp/releaseNote.txt")
+  va = File.absolute_path("../app/build/outputs/apk/")
+  va2 = va+'/*/*/*.apk'
+  path = Dir[va2][0]
+  firebase_app_distribution(
+                               app:"#{ENV['FIREBASE_ANDROID_APP_PROD']}" ,
+                               apk_path: path,
+                               release_notes: "#{releaseNote}",
+                               groups:"#{ENV['GROUP_CUSTOMER']}"
+     )
+end
+
+end
+{% endif %}
+
