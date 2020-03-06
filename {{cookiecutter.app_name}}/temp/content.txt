@@ -1,0 +1,8 @@
+
+   New build number has been uploaded successfully to Firebase!
+   Platform : IOS
+   BuildType : staging
+   Author : bacnv-1260
+   Author email : nguyen.van.bac@sun-asterisk.com
+   Note : 2020-02-28 10:27:15   Build for customer
+   

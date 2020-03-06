@@ -1,0 +1,4 @@
+{
+  "app_name": "fastlane",
+  "platforms" : "1:Android  2:iOS  3:Both" 
+}
