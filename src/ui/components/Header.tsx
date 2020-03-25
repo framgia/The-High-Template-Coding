@@ -12,10 +12,12 @@ export default class Header extends PureComponent<Props> {
   render(): React.ReactNode {
     return (
       <View style={styles.container}>
+        <View style={styles.headerContainer}>
         <View style={styles.viewTitle}>
           <MText numberOfLines={1} style={styles.title}>
             {this.props.title}
           </MText>
+        </View>
         </View>
       </View>
     );
@@ -24,23 +26,27 @@ export default class Header extends PureComponent<Props> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     alignItems: 'center',
-    marginTop: Device.statusBarHeight,
-    height: Device.topBarHeight,
+    paddingTop: Device.statusBarHeight,
+    height: Device.headerHeight,
     justifyContent: 'space-between',
     flexDirection: 'row',
     backgroundColor: Colors.black,
+  },
+  headerContainer: {
+    flex: 1,
+    height: Device.topBarHeight,
   },
   title: {
     color: Colors.white,
     fontSize: FontSize.FONT_SIZE_16,
     textAlign: 'center',
     fontWeight: 'bold',
-    flex: 1,
   },
   viewTitle: {
     flex: 1,
+    width: '100%',
+    height: '100%',
     position: 'absolute',
     justifyContent: 'center',
   },

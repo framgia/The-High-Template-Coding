@@ -4,11 +4,13 @@ import {NavigationContainer} from '@react-navigation/native';
 import SCREEN_NAME from '../ui/screens/Const';
 import SplashContainer from '../ui/screens/splash/SplashContainer';
 import MainContainer from '../ui/screens/main/MainContainer';
+import {navigationRef} from '../navigation/Navigate';
 
 const AppStackNavigator = () => {
   const Stack = createStackNavigator();
   return (
-    <NavigationContainer>
+    // @ts-ignore
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator
         initialRouteName={SCREEN_NAME.SPLASH_SCREEN}
         screenOptions={{

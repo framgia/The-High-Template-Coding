@@ -6,13 +6,8 @@ import appReducer from '../reducers';
 const loggerMiddleware = createLogger({
   predicate: () => __DEV__,
 });
-const mapStateToProps = (state: any) => ({
-  state: state.nav,
-});
 
 export const store = createStore(appReducer, applyMiddleware(loggerMiddleware));
-// export const store = createStore(appReducer);
 
-// @ts-ignore
-const AppNavigator = connect(mapStateToProps)(Router);
+const AppNavigator = connect()(Router);
 export default AppNavigator;
