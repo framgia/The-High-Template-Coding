@@ -30,7 +30,7 @@ class BaseComponent<P extends BaseProps = {}, S = {}> extends PureComponent<
         <StatusBar
           backgroundColor="transparent"
           translucent
-          barStyle="dark-content"
+          barStyle="light-content"
         />
         <View style={styles.container}>
           {this.showHeader() && <Header title={this.headerTitle()} />}

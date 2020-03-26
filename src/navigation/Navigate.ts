@@ -1,7 +1,9 @@
 import {StackActions} from '@react-navigation/native';
+import React from "react";
+
+const navigationRef: any = React.createRef();
 
 const navigateAndRest = (
-  dispatch: any,
   routeName: string,
   params: any = {},
 ) => {
@@ -10,21 +12,21 @@ const navigateAndRest = (
     needTransit: true,
   };
   const resetAction = StackActions.replace(routeName, params);
-  dispatch(resetAction);
+  navigationRef.current?.dispatch(resetAction);
 };
 
-const navigateTo = (dispatch: any, routeName: string, params: any = {}) => {
+const navigateTo = (routeName: string, params: any = {}) => {
   const navigateAction = StackActions.push(routeName, params);
-  dispatch(navigateAction);
+  navigationRef.current?.dispatch(navigateAction);
 };
 
-const goBack = (dispatch: any) => {
+const goBack = () => {
   const backAction = StackActions.pop();
-  dispatch(backAction);
+  navigationRef.current?.dispatch(backAction);
 };
 
-const popToRoot = (dispatch: any) => {
-  dispatch(StackActions.popToTop());
+const popToRoot = () => {
+  navigationRef.current?.dispatch(StackActions.popToTop());
 };
 
-export {navigateAndRest, navigateTo, goBack, popToRoot};
+export {navigateAndRest, navigateTo, goBack, popToRoot, navigationRef};
