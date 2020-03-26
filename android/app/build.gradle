@@ -76,12 +76,12 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js",
-    enableHermes: false,  // clean and rebuild if changing
+        entryFile   : "index.js",
+        enableHermes: false,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
-
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -95,7 +95,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 /**
  * The preferred build flavor of JavaScriptCore.
@@ -128,12 +128,35 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.template"
+        resValue "string", "build_config_package", "com.app"
+        applicationId project.env.get("APP_ID")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode project.env.get("VER_CODE").toInteger()
+        versionName project.env.get("VER_NAME")
+        multiDexEnabled true
+        resValue("string", "app_name", project.env.get("APP_NAME"))
     }
+
+    splits {
+        abi {
+            reset()
+            enable enableSeparateBuildPerCPUArchitecture
+            universalApk false  // If true, also generate a universal APK
+            include "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+    flavorDimensions "default"
+    productFlavors {
+        develop {
+        }
+        staging {
+        }
+        production {
+        }
+    }
+
     splits {
         abi {
             reset()
@@ -142,23 +165,35 @@ android {
             include "armeabi-v7a", "x86", "arm64-v8a", "x86_64"
         }
     }
+    File signFile = rootProject.file(project.env.get("KEY_STORE"))
     signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+        sign {
+            if (signFile.exists()) {
+                Properties properties = new Properties()
+                properties.load(new FileInputStream(signFile))
+                File f = rootProject.file(properties['key.store'])
+                if (f.exists()) {
+                    storeFile rootProject.file(properties['key.store'])
+                    storePassword properties['key.store.password']
+                    keyAlias properties['key.alias']
+                    keyPassword properties['key.alias.password']
+                }
+            }
         }
     }
     buildTypes {
         debug {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.sign
         }
         release {
+            ndk {
+                abiFilters "armeabi-v7a", "arm64-v8a"
+            }
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.sign
             minifyEnabled enableProguardInReleaseBuilds
+            shrinkResources true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
@@ -176,9 +211,18 @@ android {
 
         }
     }
+    packagingOptions {
+        pickFirst '**/armeabi-v7a/libc++_shared.so'
+        pickFirst '**/x86/libc++_shared.so'
+        pickFirst '**/arm64-v8a/libc++_shared.so'
+        pickFirst '**/x86_64/libc++_shared.so'
+        pickFirst '**/x86/libjsc.so'
+        pickFirst '**/armeabi-v7a/libjsc.so'
+    }
 }
 
 dependencies {
+    implementation project(':react-native-config')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
