@@ -20,6 +20,22 @@ class BaseComponent<P extends BaseProps = {}, S = {}> extends PureComponent<
     header: null,
   };
 
+  componentDidMount(): void {
+    // TODO
+  }
+
+  componentDidUpdate(
+    prevProps: Readonly<P>,
+    prevState: Readonly<S>,
+    snapshot?: any,
+  ): void {
+    // TODO
+  }
+
+  componentWillUnmount(): void {
+    // TODO
+  }
+
   render(): React.ReactNode {
     let contentContainerStyle;
     if (this.contentContainerStyle()) {

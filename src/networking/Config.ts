@@ -1,9 +1,9 @@
-import Config from "react-native-config";
+import Config from 'react-native-config';
 
 export class API {
   url: string;
   method: string;
-  constructor(url: string, method: "post" | "get" | "put" | "delete") {
+  constructor(url: string, method: 'post' | 'get' | 'put' | 'delete') {
     this.url = url;
     this.method = method;
   }
@@ -14,6 +14,6 @@ export class API {
 export default {
   BASE: Config.BASE_URL,
   API: {
-    Movies: new API("/movies.json", "get")
-  }
+    Movies: new API('/movies.json', 'get'),
+  },
 };

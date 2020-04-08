@@ -1,5 +1,5 @@
-import axios from "axios";
-import Config, { API } from "./Config";
+import axios from 'axios';
+import Config, {API} from './Config';
 
 /**
  * @param api config with information server
@@ -11,19 +11,19 @@ export default async function(
   api: API,
   headers = {},
   params = null,
-  data = null
+  data = null,
 ) {
   let url = Config.BASE + api.url;
   /*
-  * Header for verification with server
-  * Config:
-  *         - Authorization
-  *         - content-type
-  *         - ...
-  * */
+   * Header for verification with server
+   * Config:
+   *         - Authorization
+   *         - content-type
+   *         - ...
+   * */
   headers = {
     ...headers,
-    "content-type": "application/json"
+    'content-type': 'application/json',
   };
   // @ts-ignore
   return axios({
@@ -32,6 +32,6 @@ export default async function(
     timeout: 20000,
     headers,
     data,
-    params
+    params,
   });
 }

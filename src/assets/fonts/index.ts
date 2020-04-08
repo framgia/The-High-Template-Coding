@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import {Platform} from 'react-native';
 const Fonts = {
   // hiraKakuProW6: Platform.select({
   //   ios: "HiraKakuProN-W6",

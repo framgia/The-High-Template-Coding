@@ -13,11 +13,11 @@ export default class Header extends PureComponent<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.headerContainer}>
-        <View style={styles.viewTitle}>
-          <MText numberOfLines={1} style={styles.title}>
-            {this.props.title}
-          </MText>
-        </View>
+          <View style={styles.viewTitle}>
+            <MText numberOfLines={1} style={styles.title}>
+              {this.props.title}
+            </MText>
+          </View>
         </View>
       </View>
     );
