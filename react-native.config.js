@@ -1,10 +1,10 @@
 const platforms = {
   android: null,
-  ios: null
+  ios: null,
 };
 
 module.exports = {
   dependencies: {
-    "react-native-config": { platforms }
-  }
+    'react-native-config': {platforms},
+  },
 };

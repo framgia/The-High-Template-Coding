@@ -1,9 +1,27 @@
 import React from 'react';
-import {View} from 'react-native';
-import {BaseComponent} from '../../components';
-export default class MainScreen extends BaseComponent {
+import {Button, View} from 'react-native';
+import {BaseComponent, BaseProps} from '../../components';
+
+interface Props extends BaseProps {
+  getMovies();
+}
+
+export default class MainScreen extends BaseComponent<Props> {
+  componentDidMount(): void {
+    super.componentDidMount();
+  }
+
   renderViewContent() {
-    return <View />;
+    return (
+      <View>
+        <Button
+          title={'Get'}
+          onPress={() => {
+            this.props.getMovies();
+          }}
+        />
+      </View>
+    );
   }
 
   headerTitle(): string {
