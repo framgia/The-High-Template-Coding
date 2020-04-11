@@ -1,6 +1,6 @@
 import React, {PureComponent, Fragment} from 'react';
 import {View, StyleSheet, StatusBar, SafeAreaView} from 'react-native';
-import {Header, MKeyboardShift} from '../components';
+import {Header, MKeyboardShift, MDialogLoading} from '../components';
 
 /**
  * P: your props placeholder
@@ -8,6 +8,7 @@ import {Header, MKeyboardShift} from '../components';
  * */
 
 export interface BaseProps {
+  // A base props all screen need declare ...container/mapStateToProps to auto mapping props
   isLoading?: boolean;
 }
 
@@ -16,6 +17,7 @@ class BaseComponent<P extends BaseProps = {}, S = {}> extends PureComponent<
   S
 > {
   private scrollView;
+  private dialogLoading?: MDialogLoading | null;
   static navigationOptions = {
     header: null,
   };
@@ -24,12 +26,14 @@ class BaseComponent<P extends BaseProps = {}, S = {}> extends PureComponent<
     // TODO
   }
 
-  componentDidUpdate(
-    prevProps: Readonly<P>,
-    prevState: Readonly<S>,
-    snapshot?: any,
-  ): void {
-    // TODO
+  /**
+   * Handle common logic when store change
+   * - Show/Hide loading dialog when dispatch an async action
+   * */
+  componentDidUpdate(prevProps: Readonly<P>): void {
+    if (prevProps.isLoading !== this.props.isLoading) {
+      this.dialogLoading && this.dialogLoading.show(this.props.isLoading);
+    }
   }
 
   componentWillUnmount(): void {
@@ -59,6 +63,7 @@ class BaseComponent<P extends BaseProps = {}, S = {}> extends PureComponent<
             </MKeyboardShift>
           </SafeAreaView>
         </View>
+        <MDialogLoading ref={r => (this.dialogLoading = r)} />
       </Fragment>
     );
   }

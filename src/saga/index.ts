@@ -30,7 +30,7 @@ function* doAsync(sagaAction: SagaAction, api: API) {
       );
       yield put({type: sagaAction.getSuccess(), data});
     } catch (e) {
-      yield put({type: sagaAction.getFail(), message: e.message});
+      yield put({type: sagaAction.getFail(), error: e.message});
     }
   });
 }
