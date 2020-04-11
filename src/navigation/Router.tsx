@@ -6,6 +6,10 @@ import SplashContainer from '../ui/screens/splash/SplashContainer';
 import MainContainer from '../ui/screens/main/MainContainer';
 import {navigationRef} from '../navigation/Navigate';
 
+/**
+ * Declare all screen on your project
+ * To navigate between screens using functions on #Navigate
+ * */
 const AppStackNavigator = () => {
   const Stack = createStackNavigator();
   return (
