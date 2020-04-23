@@ -35,6 +35,6 @@ extension MainAssembler where Self: DefaultAssembler {
     }
     
     func resolve() -> MainUseCaseType {
-        return MainUseCase()
+        return MainUseCase(repoRepo: resolve())
     }
 }

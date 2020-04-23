@@ -10,3 +10,9 @@ enum Title {
     static let error = "Error"
     static let ok = "OK"
 }
+
+struct JSONKey {
+    static let perPage = "per_page"
+    static let page = "page"
+    static let language = "q"
+}

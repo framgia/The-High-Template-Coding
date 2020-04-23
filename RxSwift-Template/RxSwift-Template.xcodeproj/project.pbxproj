@@ -8,7 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		9401FE7FD65CCB96476743F1 /* Pods_RxSwift_TemplateTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8336C1EDBC744302B5F56D53 /* Pods_RxSwift_TemplateTests.framework */; };
-		9CA37F08243C783F003F565F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA37F07243C783F003F565F /* Constants.swift */; };
+		9C21BD93244FFD010088D4B9 /* APIUrls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BD92244FFD010088D4B9 /* APIUrls.swift */; };
+		9C21BD9A244FFE9C0088D4B9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BD99244FFE9C0088D4B9 /* Constants.swift */; };
+		9C21BDA12450194B0088D4B9 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDA02450194B0088D4B9 /* APIService.swift */; };
+		9C21BDA324501A480088D4B9 /* APIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDA224501A480088D4B9 /* APIInput.swift */; };
+		9C21BDA524502A010088D4B9 /* RepositoryAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDA424502A010088D4B9 /* RepositoryAssembler.swift */; };
+		9C21BDA7245049050088D4B9 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDA6245049050088D4B9 /* Repo.swift */; };
+		9C21BDA92450491F0088D4B9 /* API+Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDA82450491F0088D4B9 /* API+Repo.swift */; };
+		9C21BDAB2450498F0088D4B9 /* APIOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDAA2450498F0088D4B9 /* APIOutput.swift */; };
+		9C21BDAD245049E70088D4B9 /* RepoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDAC245049E70088D4B9 /* RepoRepository.swift */; };
+		9C21BDB0245079810088D4B9 /* RepoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C21BDAE245079800088D4B9 /* RepoCell.xib */; };
+		9C21BDB1245079810088D4B9 /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDAF245079800088D4B9 /* RepoCell.swift */; };
+		9C21BDB3245079E10088D4B9 /* RepoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDB2245079E10088D4B9 /* RepoViewModel.swift */; };
+		9C21BDB524507A640088D4B9 /* UIImageView+SDWebImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C21BDB424507A640088D4B9 /* UIImageView+SDWebImage.swift */; };
 		9CA37F0A243C7A80003F565F /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA37F09243C7A80003F565F /* UIViewController+Rx.swift */; };
 		9CC82B45243AD3B800D95996 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC82B44243AD3B800D95996 /* AppDelegate.swift */; };
 		9CC82B4C243AD3B800D95996 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9CC82B4A243AD3B800D95996 /* Main.storyboard */; };
@@ -46,7 +58,19 @@
 		38F4B79C4F92C9272C254CCC /* Pods_RxSwift_Template.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_Template.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8336C1EDBC744302B5F56D53 /* Pods_RxSwift_TemplateTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RxSwift_TemplateTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		996EE038CD46BD9045BA530F /* Pods-RxSwift-Template.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RxSwift-Template.release.xcconfig"; path = "Target Support Files/Pods-RxSwift-Template/Pods-RxSwift-Template.release.xcconfig"; sourceTree = "<group>"; };
-		9CA37F07243C783F003F565F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9C21BD92244FFD010088D4B9 /* APIUrls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIUrls.swift; path = Services/API/APIUrls.swift; sourceTree = SOURCE_ROOT; };
+		9C21BD99244FFE9C0088D4B9 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9C21BDA02450194B0088D4B9 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIService.swift; path = Services/API/APIService.swift; sourceTree = SOURCE_ROOT; };
+		9C21BDA224501A480088D4B9 /* APIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIInput.swift; path = Services/API/APIInput.swift; sourceTree = SOURCE_ROOT; };
+		9C21BDA424502A010088D4B9 /* RepositoryAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RepositoryAssembler.swift; path = Services/API/RepositoryAssembler.swift; sourceTree = SOURCE_ROOT; };
+		9C21BDA6245049050088D4B9 /* Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
+		9C21BDA82450491F0088D4B9 /* API+Repo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "API+Repo.swift"; path = "Services/API/API+Repo.swift"; sourceTree = SOURCE_ROOT; };
+		9C21BDAA2450498F0088D4B9 /* APIOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = APIOutput.swift; path = Services/API/APIOutput.swift; sourceTree = SOURCE_ROOT; };
+		9C21BDAC245049E70088D4B9 /* RepoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RepoRepository.swift; path = Services/API/RepoRepository.swift; sourceTree = SOURCE_ROOT; };
+		9C21BDAE245079800088D4B9 /* RepoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RepoCell.xib; sourceTree = "<group>"; };
+		9C21BDAF245079800088D4B9 /* RepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
+		9C21BDB2245079E10088D4B9 /* RepoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoViewModel.swift; sourceTree = "<group>"; };
+		9C21BDB424507A640088D4B9 /* UIImageView+SDWebImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+SDWebImage.swift"; sourceTree = "<group>"; };
 		9CA37F09243C7A80003F565F /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		9CC82B41243AD3B800D95996 /* RxSwift-Template.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift-Template.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CC82B44243AD3B800D95996 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,13 +128,32 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9CA37F06243C75B1003F565F /* Define */ = {
+		9C21BD91244FFCDD0088D4B9 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				9CA37F07243C783F003F565F /* Constants.swift */,
+				9C21BD92244FFD010088D4B9 /* APIUrls.swift */,
+				9C21BDA02450194B0088D4B9 /* APIService.swift */,
+				9C21BDA224501A480088D4B9 /* APIInput.swift */,
+				9C21BDA82450491F0088D4B9 /* API+Repo.swift */,
+				9C21BDAA2450498F0088D4B9 /* APIOutput.swift */,
 			);
-			name = Define;
-			path = "Dèine";
+			path = API;
+			sourceTree = "<group>";
+		};
+		9C21BD98244FFE9C0088D4B9 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				9C21BD99244FFE9C0088D4B9 /* Constants.swift */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
+		9C21BD9B244FFEBD0088D4B9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9C21BDA6245049050088D4B9 /* Repo.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		9CC82B38243AD3B800D95996 = {
@@ -136,7 +179,7 @@
 		9CC82B43243AD3B800D95996 /* RxSwift-Template */ = {
 			isa = PBXGroup;
 			children = (
-				9CA37F06243C75B1003F565F /* Define */,
+				9C21BD98244FFE9C0088D4B9 /* Define */,
 				9CC82B6B243AD47A00D95996 /* Assembler */,
 				9CC82B6A243AD45E00D95996 /* Support */,
 				9CC82B69243AD45700D95996 /* Extension */,
@@ -184,7 +227,7 @@
 		9CC82B68243AD44F00D95996 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				9CC82B8D243B078600D95996 /* Models */,
+				9C21BD9B244FFEBD0088D4B9 /* Models */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -194,6 +237,7 @@
 			children = (
 				9CC82B92243B128100D95996 /* UIViewController+.swift */,
 				9CA37F09243C7A80003F565F /* UIViewController+Rx.swift */,
+				9C21BDB424507A640088D4B9 /* UIImageView+SDWebImage.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -217,11 +261,14 @@
 		9CC82B6C243AD48F00D95996 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				9C21BDAF245079800088D4B9 /* RepoCell.swift */,
+				9C21BDAE245079800088D4B9 /* RepoCell.xib */,
 				9CC82B7F243AE5D800D95996 /* MainViewController.swift */,
 				9CC82B83243AE62300D95996 /* MainViewModel.swift */,
 				9CC82B85243AE62F00D95996 /* MainUseCase.swift */,
 				9CC82B87243AE64000D95996 /* MainNavigator.swift */,
 				9CC82B8B243B030500D95996 /* MainAssembler.swift */,
+				9C21BDB2245079E10088D4B9 /* RepoViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -249,15 +296,10 @@
 		9CC82B7C243AE2BA00D95996 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				9C21BDA424502A010088D4B9 /* RepositoryAssembler.swift */,
+				9C21BDAC245049E70088D4B9 /* RepoRepository.swift */,
 			);
 			path = Repositories;
-			sourceTree = "<group>";
-		};
-		9CC82B8D243B078600D95996 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		9CC82B8E243B095D00D95996 /* LocalData */ = {
@@ -270,6 +312,7 @@
 		9CC82B8F243B096600D95996 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9C21BD91244FFCDD0088D4B9 /* API */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -372,6 +415,7 @@
 				9CC82B51243AD3BD00D95996 /* LaunchScreen.storyboard in Resources */,
 				9CC82B4E243AD3BD00D95996 /* Assets.xcassets in Resources */,
 				9CC82B4C243AD3B800D95996 /* Main.storyboard in Resources */,
+				9C21BDB0245079810088D4B9 /* RepoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,22 +497,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C21BDA12450194B0088D4B9 /* APIService.swift in Sources */,
 				9CC82B93243B128100D95996 /* UIViewController+.swift in Sources */,
+				9C21BDAB2450498F0088D4B9 /* APIOutput.swift in Sources */,
+				9C21BDA7245049050088D4B9 /* Repo.swift in Sources */,
+				9C21BDB1245079810088D4B9 /* RepoCell.swift in Sources */,
+				9C21BDA92450491F0088D4B9 /* API+Repo.swift in Sources */,
 				9CC82B6F243ADA3500D95996 /* Assembler.swift in Sources */,
 				9CC82B78243ADA8000D95996 /* AppViewModel.swift in Sources */,
 				9CC82B91243B0AC800D95996 /* Utils.swift in Sources */,
 				9CC82B8A243AE67700D95996 /* Storyboard.swift in Sources */,
-				9CA37F08243C783F003F565F /* Constants.swift in Sources */,
+				9C21BD93244FFD010088D4B9 /* APIUrls.swift in Sources */,
+				9C21BDB3245079E10088D4B9 /* RepoViewModel.swift in Sources */,
 				9CA37F0A243C7A80003F565F /* UIViewController+Rx.swift in Sources */,
 				9CC82B75243ADA8000D95996 /* AppUseCase.swift in Sources */,
 				9CC82B84243AE62300D95996 /* MainViewModel.swift in Sources */,
+				9C21BDA324501A480088D4B9 /* APIInput.swift in Sources */,
 				9CC82B77243ADA8000D95996 /* AppAssembler.swift in Sources */,
+				9C21BDAD245049E70088D4B9 /* RepoRepository.swift in Sources */,
 				9CC82B81243AE5D800D95996 /* MainViewController.swift in Sources */,
 				9CC82B8C243B030500D95996 /* MainAssembler.swift in Sources */,
+				9C21BDA524502A010088D4B9 /* RepositoryAssembler.swift in Sources */,
+				9C21BDB524507A640088D4B9 /* UIImageView+SDWebImage.swift in Sources */,
 				9CC82B45243AD3B800D95996 /* AppDelegate.swift in Sources */,
 				9CC82B86243AE62F00D95996 /* MainUseCase.swift in Sources */,
 				9CC82B88243AE64000D95996 /* MainNavigator.swift in Sources */,
 				9CC82B76243ADA8000D95996 /* AppNavigator.swift in Sources */,
+				9C21BD9A244FFE9C0088D4B9 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

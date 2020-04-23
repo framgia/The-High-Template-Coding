@@ -7,9 +7,13 @@
 //
 
 protocol MainUseCaseType {
-
+    func getRepoList(page: Int) -> Observable<PagingInfo<Repo>>
 }
 
 struct MainUseCase: MainUseCaseType {
-
+    let repoRepo: RepoRepositoryType
+    
+    func getRepoList(page: Int) -> Observable<PagingInfo<Repo>>{
+        return repoRepo.getRepoList(page: page, perPage: 10, useCache: page == 1)
+    }
 }
