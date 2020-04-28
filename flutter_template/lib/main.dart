@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_template/utils/locator.dart';
 
-import 'app.dart';
+import 'ui/app.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  setupLocator();
+  runApp(MyApp());
+}
