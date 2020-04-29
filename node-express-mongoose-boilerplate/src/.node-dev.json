@@ -1,0 +1,50 @@
+{
+  "timestamp": "isoDateTime",
+  "dedupe": true,
+  "graceful_ipc": "SIGINT",
+  "extensions": {
+    "js": {
+      "name": "@babel/register",
+      "options": {
+        "only": [
+          "src/**"
+        ]
+      }
+    }
+  },
+  "ignore": [
+    ".circleci",
+    ".git",
+    "acceptance",
+    "batch",
+    "coverage",
+    "data",
+    "doc",
+    "infrastructure",
+    "lib",
+    "node_modules",
+    "scripts",
+    "test",
+    ".codeclimate.json",
+    ".dockerignore",
+    ".editorconfig",
+    ".eslintignore",
+    ".eslintrc.js",
+    ".gitattributes",
+    ".gitignore",
+    ".huskyrc.js",
+    ".prettierignore",
+    ".remarkignore",
+    ".remarkrc.js",
+    "deploy.sh",
+    "docker-compose.yml",
+    "Dockerfile",
+    "env.sh",
+    "jest.config.js",
+    "lint-staged.config.js",
+    "package.json",
+    "prettier.config.js",
+    "README.md",
+    "package-lock.json"
+  ]
+}

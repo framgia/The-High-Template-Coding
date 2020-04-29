@@ -1,0 +1,30 @@
+{
+  "host": "localhost",
+  "port": 3030,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 20
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "/eT9xamCg7JpE/Gj0lD4YqU4TmA=",
+    "authStrategies": ["jwt", "local"],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://yourdomain.com",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    }
+  },
+  "mongodbURL": "mongodb://localhost:27017/test",
+  "redisURL": "redis://localhost:6379"
+}
