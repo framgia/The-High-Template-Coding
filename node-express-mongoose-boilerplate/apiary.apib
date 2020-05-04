@@ -1,0 +1,28 @@
+FORMAT: 1A
+HOST: http://localhost:3030
+
+# Data Structures
+
+## User (object)
++ id: 42 (number, required)
++ email: user@email.com (string)
+
+# Group Users
+
+## User [/users/{id}]
+
++ Parameters
+  + id (string, required) - ID of an User
+
+### Get User [GET]
+
+Authentication: required
+
+Authorization: required
+
+Error Codes:
+- INALID_AUTH_CODE (401)
+
++ Response 200 (application/json; charset=utf-8)
+  + Body
+    + Attributes (User)
