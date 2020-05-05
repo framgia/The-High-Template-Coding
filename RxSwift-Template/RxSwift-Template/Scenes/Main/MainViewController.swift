@@ -6,15 +6,18 @@
 //  Copyright © 2020 nguyen.the.trinh. All rights reserved.
 //
 
-final class MainViewController: UIViewController, BindableType {
+final class MainViewController: UIViewController, BindableType, UITableViewDelegate {
     
     // MARK: - IBOutlets
     
-    @IBOutlet weak var tableView: UITableView!
+
+    @IBOutlet private weak var tableView: RefreshTableView!
     
     // MARK: - Properties
 
     var viewModel: MainViewModel!
+    private let disposeBag = DisposeBag()
+    private var repos:[Repo] = []
     
     // MARK: - Life Cycle
     
@@ -37,13 +40,57 @@ final class MainViewController: UIViewController, BindableType {
     // MARK: - Methods
     
     private func configView() {
-
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(cellType: RepoCell.self)
     }
     
     func bindViewModel() {
-        let input = MainViewModel.Input()
+        let input = MainViewModel.Input(trigger: Driver.just(()),
+        reloadTrigger: tableView.loadMoreTopTrigger,
+        loadMoreTrigger: tableView.loadMoreBottomTrigger)
         
-        _ = viewModel.transform(input)
+        let output = viewModel.transform(input)
+        
+        output.data.drive(dataBinder).disposed(by: disposeBag)
+        
+        output.error
+                .drive(rx.error)
+                .disposed(by: rx.disposeBag)
+            
+            output.isLoading
+                .drive(rx.isLoading)
+                .disposed(by: rx.disposeBag)
+            
+            output.isReloading
+                .drive(tableView.isLoadingMoreTop)
+                .disposed(by: rx.disposeBag)
+            
+            output.isLoadingMore
+                .drive(tableView.isLoadingMoreBottom)
+                .disposed(by: rx.disposeBag)
+    }
+}
+
+extension MainViewController {
+    var dataBinder: Binder<[Repo]> {
+        return Binder(self) {vc, data in
+            vc.repos = data
+            print(data)
+            vc.tableView.reloadData()
+        }
+    }
+}
+
+extension MainViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return repos.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(for: indexPath, cellType: RepoCell.self)
+        cell.bindViewModel(RepoViewModel(repo: self.repos[indexPath.row]))
+        return cell
     }
 }
 

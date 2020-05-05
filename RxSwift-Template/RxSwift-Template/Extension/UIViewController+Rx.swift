@@ -6,6 +6,8 @@
 //  Copyright © 2020 nguyen.the.trinh. All rights reserved.
 //
 
+import MBProgressHUD
+
 extension Reactive where Base: UIViewController {
     var error: Binder<Error> {
         return Binder(base) { viewController, error in
