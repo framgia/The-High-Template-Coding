@@ -46,6 +46,11 @@ Run commands to remove and install node module:
 npm rm-i
 ```
 
+IOS only:
+```
+cd ios && pod install && cd ..
+```
+
 ### ANDROID
 
 - **Run android:**
@@ -80,9 +85,9 @@ npm run android-build-prod
 - **Run ios (only simulator):**
 
 ```
-npm ios
-npm ios-stg
-npm ios-prod
+npm run ios
+npm run ios-stg
+npm run ios-prod
 ```                                               
 # Coding Rules
 ## Components
