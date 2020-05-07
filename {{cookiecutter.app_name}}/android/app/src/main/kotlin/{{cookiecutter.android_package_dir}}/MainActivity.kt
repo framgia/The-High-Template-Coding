@@ -1,4 +1,4 @@
-package com.example.flutter_template
+package {{cookiecutter.app_id}}
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/utils/locator.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/utils/locator.dart';
 
 import 'ui/app.dart';
 

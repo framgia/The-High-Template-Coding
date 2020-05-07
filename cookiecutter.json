@@ -1,5 +1,7 @@
 {
   "app_name": "MyApp",
   "app_id": "sun.flutter.sample",
+  "flutter_package_name":"sample",
+  "android_package_dir":"{{cookiecutter.app_id | replace('.', '/')}}",
   "_copy_without_render": []
 }
