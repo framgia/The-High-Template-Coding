@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  RxSwift-Template
+
+  Created by Dung Khuat on 5/5/20.
+  Copyright © 2020 nguyen.the.trinh. All rights reserved.
+*/
+"OK" = "OK";
+"Error" = "Error";
