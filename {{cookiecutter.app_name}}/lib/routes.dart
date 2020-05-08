@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_template/ui/screen/screens.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/ui/screen/screens.dart';
 
 class Routes {
   Routes._();

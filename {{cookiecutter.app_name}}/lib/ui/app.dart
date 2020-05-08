@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_template/localizations.dart';
-import 'package:flutter_template/route_observer.dart';
-import 'package:flutter_template/routes.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/localizations.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/route_observer.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/routes.dart';
 
 class MyApp extends StatelessWidget {
   final _navigationKey = GlobalKey<NavigatorState>();

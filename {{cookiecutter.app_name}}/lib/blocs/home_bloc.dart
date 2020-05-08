@@ -1,6 +1,6 @@
-import 'package:flutter_template/blocs/base_bloc/base.dart';
-import 'package:flutter_template/data/repository/home_repository.dart';
-import 'package:flutter_template/utils/locator.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/blocs/base_bloc/base.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/data/repository/home_repository.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/utils/locator.dart';
 
 class HomeBloc extends BaseBloc {
   final HomeRepository homeRepository;
