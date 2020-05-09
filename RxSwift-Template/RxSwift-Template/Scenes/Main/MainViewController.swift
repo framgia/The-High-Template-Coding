@@ -11,7 +11,7 @@ final class MainViewController: UIViewController, BindableType, UITableViewDeleg
     // MARK: - IBOutlets
     
 
-    @IBOutlet private weak var tableView: RefreshTableView!
+    @IBOutlet weak var tableView: RefreshTableView!
     
     // MARK: - Properties
 
