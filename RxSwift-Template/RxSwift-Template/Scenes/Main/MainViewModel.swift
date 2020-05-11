@@ -14,40 +14,37 @@ struct MainViewModel {
 // MARK: - ViewModelType
 extension MainViewModel: ViewModelType {
     struct Input {
-        let trigger: Driver<Void>
-        let reloadTrigger: Driver<Void>
-        let loadMoreTrigger: Driver<Void>
+        let trigger: Driver<Int>
+        let selectRepoTrigger: Driver<Repo>
     }
     
     struct Output {
         let data: Driver<[Repo]>
-        let error: Driver<Error>
         let isLoading: Driver<Bool>
-        let isReloading: Driver<Bool>
-        let isLoadingMore: Driver<Bool>
-        let isEmpty: Driver<Bool>
+        let error: Driver<Error>
+        let selectedRepo: Driver<Void>
     }
     
     func transform(_ input: Input) -> Output {
-        let getPageResult = getPage(
-            loadTrigger: input.trigger,
-            reloadTrigger: input.reloadTrigger,
-            loadMoreTrigger: input.loadMoreTrigger,
-            getItems: useCase.getRepoList(page:))
+        let errorTracker = ErrorTracker()
+        let activityIndicator = ActivityIndicator()
+        let isLoading = activityIndicator.asDriver()
         
-        let (page, paginationError, isLoading, isReloading, isLoadingMore) = getPageResult.destructured
+        let repoList = input.trigger.flatMap {
+            self.useCase.getRepoList(page:$0)
+                .trackError(errorTracker)
+                .trackActivity(activityIndicator)
+                .asDriverOnErrorJustComplete()
+        }.compactMap {$0.items}
         
-        let repoList = page
-            .map { $0.items }
+        let selectedRepo = input.selectRepoTrigger.map {
+            self.navigator.toRepoDetail(repo: $0)
+        }
         
-        let isEmpty = checkIfDataIsEmpty(trigger: Driver.merge(isLoading, isReloading),
-                                         items: repoList)
         
         return Output(data: repoList,
-                      error: paginationError,
                       isLoading: isLoading,
-                      isReloading: isReloading,
-                      isLoadingMore: isLoadingMore,
-                      isEmpty: isEmpty)
+                      error: errorTracker.asDriver(),
+                      selectedRepo: selectedRepo)
     }
 }

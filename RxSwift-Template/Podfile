@@ -4,16 +4,16 @@
 target 'RxSwift-Template' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  # Clean Architecture
-  pod 'MGArchitecture', '~> 1.3.1'
-  pod 'MGAPIService', '~> 2.2.1'
-  pod 'MGLoadMore', '~> 1.3.1'
-  
+  # Networking
+  pod 'Alamofire'
+  pod 'RxAlamofire'
+
   # Rx
   pod 'NSObject+Rx', '~> 5.0'
-  
+  pod 'RxCocoa', '~> 5.0'
+  pod 'RxSwift', '5.1'
+    
   # Core
-  pod 'ObjectMapper', '~> 3.5'
   pod 'Reusable', '~> 4.1'
   pod 'Then', '~> 2.4'
   pod 'Validator', '~> 3.2.1'

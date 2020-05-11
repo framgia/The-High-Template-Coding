@@ -14,7 +14,7 @@ struct RepoViewModel {
     }
     
     var url: URL? {
-        return URL(string: repo.avatarURLString)
+        return URL(string: repo.owner.avatarUrl)
     }
 }
 

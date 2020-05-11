@@ -10,21 +10,26 @@
 import RxSwift
 
 final class MainUseCaseMock: MainUseCaseType {
-
+ 
     // MARK: - loadMoreRepoList
     
     var getRepoListCalled = false
     
-    var getRepoListReturnValue: Observable<PagingInfo<Repo>> = {
+    var getRepoListReturnValue: Observable<ResponseData<[Repo]>> = {
         let items = [
-            Repo().with { $0.id = 2 }
+            Repo(id: 2,
+                 name: "",
+                 fullname: "",
+                 urlString: "",
+                 starCount: 0,
+                 folkCount: 1,
+                 owner: Owner(avatarUrl: ""))
         ]
-        
-        let page = PagingInfo<Repo>(page: 2, items: items)
+        let page = ResponseData<[Repo]>(items: items)
         return Observable.just(page)
     }()
     
-    func getRepoList(page: Int) -> Observable<PagingInfo<Repo>> {
+    func getRepoList(page: Int) -> Observable<ResponseData<[Repo]>> {
         getRepoListCalled = true
         return getRepoListReturnValue
     }
