@@ -65,3 +65,6 @@ Description  lane
 | develop , staging ,production | Platform iOS/Android  lane  will run build and distribute to Firebase for each environment develop ,staging,production|       |
 | buildAppDevelop , buildAppStaging , buildAppProduction | Platform iOS/Android only build and generate APK/ipa file  |   |
 | uploadFirebaseDevelop , uploadFirebaseStaging , uploadFirebaseProduction | Platform iOS/Android only distribute to Firebase|      |
+#### Know issues and Troubleshooting
+`firebase_app_distribution` plugin doesn't work in macOS Catalina
+    https://github.com/fastlane/fastlane/issues/15506  💬
