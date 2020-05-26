@@ -6,33 +6,34 @@
 //  Copyright © 2020 nguyen.the.trinh. All rights reserved.
 //
 
-import ObjectMapper
 
-struct Repo {
-    var id = 0
-    var name = ""
-    var fullname = ""
-    var urlString = ""
-    var starCount = 0
-    var folkCount = 0
-    var avatarURLString = ""
-}
-
-extension Repo: Then, Equatable { }
-
-extension Repo: Mappable {
+struct Repo: Codable {
+    var id: Int
+    var name: String
+    var fullname: String
+    var urlString: String
+    var starCount: Int
+    var folkCount: Int
+    var owner: Owner
     
-    init?(map: Map) {
-        self.init()
-    }
     
-    mutating func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-        fullname <- map["full_name"]
-        urlString <- map["html_url"]
-        starCount <- map["stargazers_count"]
-        folkCount <- map["forks"]
-        avatarURLString <- map["owner.avatar_url"]
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case fullname = "full_name"
+        case urlString = "url"
+        case starCount = "stargazers_count"
+        case folkCount = "forks_count"
+        case owner = "owner"
     }
 }
+
+struct Owner: Codable {
+    var avatarUrl: String
+    
+    enum CodingKeys: String, CodingKey {
+        case avatarUrl = "avatar_url"
+    }
+}
+
+extension Repo: Then { }

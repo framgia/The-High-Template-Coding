@@ -7,10 +7,14 @@
 //
 
 protocol MainNavigatorType {
-    
+     func toRepoDetail(repo: Repo)
 }
 
 struct MainNavigator: MainNavigatorType {
     unowned let assembler: Assembler
     unowned let navigationController: UINavigationController
+    
+    func toRepoDetail(repo: Repo) {
+        print(repo.name)
+    }
 }

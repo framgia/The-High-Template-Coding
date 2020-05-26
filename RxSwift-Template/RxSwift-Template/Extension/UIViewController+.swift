@@ -8,6 +8,10 @@
 import MBProgressHUD
 
 extension UIViewController {
+    func logDeinit() {
+        Logger.debug(String(describing: type(of: self)) + " deinit")
+    }
+    
     func showError(message: String, completion: (() -> Void)? = nil) {
         let ac = UIAlertController(title: Title.error.localized,
                                    message: message,

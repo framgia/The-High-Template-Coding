@@ -9,15 +9,15 @@
 final class MainViewController: UIViewController, BindableType, UITableViewDelegate {
     
     // MARK: - IBOutlets
-    
-
-    @IBOutlet private weak var tableView: RefreshTableView!
+    @IBOutlet weak var tableView: UITableView!
     
     // MARK: - Properties
-
+    
     var viewModel: MainViewModel!
     private let disposeBag = DisposeBag()
     private var repos:[Repo] = []
+    private var loadTrigger = PublishSubject<Int>()
+    private var page: Int = 1
     
     // MARK: - Life Cycle
     
@@ -28,7 +28,6 @@ final class MainViewController: UIViewController, BindableType, UITableViewDeleg
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        
         SDImageCache.shared.clearMemory()
         SDImageCache.shared.clearDisk()
     }
@@ -46,37 +45,28 @@ final class MainViewController: UIViewController, BindableType, UITableViewDeleg
     }
     
     func bindViewModel() {
-        let input = MainViewModel.Input(trigger: Driver.just(()),
-        reloadTrigger: tableView.loadMoreTopTrigger,
-        loadMoreTrigger: tableView.loadMoreBottomTrigger)
         
+        let selectTrigger = tableView.rx.itemSelected.compactMap { [weak self] index in
+            self?.repos[index.row]
+        }.asDriverOnErrorJustComplete()
+        
+        let input = MainViewModel.Input(trigger: loadTrigger.asDriverOnErrorJustComplete(),
+                                        selectRepoTrigger: selectTrigger)
         let output = viewModel.transform(input)
-        
         output.data.drive(dataBinder).disposed(by: disposeBag)
+        output.selectedRepo.drive().disposed(by: disposeBag)
+        output.isLoading.drive(rx.isLoading).disposed(by: disposeBag)
+        output.error.drive(rx.error).disposed(by: disposeBag)
         
-        output.error
-                .drive(rx.error)
-                .disposed(by: rx.disposeBag)
-            
-            output.isLoading
-                .drive(rx.isLoading)
-                .disposed(by: rx.disposeBag)
-            
-            output.isReloading
-                .drive(tableView.isLoadingMoreTop)
-                .disposed(by: rx.disposeBag)
-            
-            output.isLoadingMore
-                .drive(tableView.isLoadingMoreBottom)
-                .disposed(by: rx.disposeBag)
+        loadTrigger.onNext(1)
     }
 }
 
 extension MainViewController {
     var dataBinder: Binder<[Repo]> {
         return Binder(self) {vc, data in
-            vc.repos = data
-            print(data)
+            vc.repos.append(contentsOf: data)
+            vc.page += 1
             vc.tableView.reloadData()
         }
     }
@@ -90,6 +80,9 @@ extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(for: indexPath, cellType: RepoCell.self)
         cell.bindViewModel(RepoViewModel(repo: self.repos[indexPath.row]))
+        if indexPath.row == repos.count - 1 {
+            loadTrigger.onNext(page + 1)
+        }
         return cell
     }
 }

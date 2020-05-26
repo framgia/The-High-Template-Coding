@@ -1,19 +1,14 @@
-# The-High-Template-Coding
+# RxSwift Template
 
-## Note:
-The template code for ios project
-- MVVM design pattern
+
+## Architecture
+- MVVM
 - RxSwift
-- MGCleanArchitecture
 
-Step build
+## How to run?
 1. Fork repo: https://github.com/framgia/The-High-Template-Coding
 2. Checkout branch ios
 3. run "pod install" in terminal of repo direction path
 4. open project in Xcode and run
 
-Code Example:
-
-- Load and show repo swift in github (use tableview)
-- Api url: https://api.github.com/search/repositories
 

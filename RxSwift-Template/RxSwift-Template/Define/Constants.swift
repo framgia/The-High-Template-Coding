@@ -16,3 +16,7 @@ struct JSONKey {
     static let page = "page"
     static let language = "q"
 }
+
+struct Constant {
+    static let versionApp = "CFBundleShortVersionString"
+}

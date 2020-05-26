@@ -11,3 +11,7 @@ func after(interval: TimeInterval, completion: (() -> Void)?) {
         completion?()
     }
 }
+
+func appVersion() -> String? {
+    return Bundle.main.object(forInfoDictionaryKey: Constant.versionApp) as? String
+}
