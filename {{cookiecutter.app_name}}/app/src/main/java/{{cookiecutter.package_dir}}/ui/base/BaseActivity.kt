@@ -5,13 +5,14 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import {{cookiecutter.package_name}}.BR
 
 abstract class BaseActivity<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> :
     AppCompatActivity() {
     protected lateinit var viewBinding: ViewBinding
 
     protected abstract val viewModel: ViewModel
+
+    protected abstract val bindingVariable: Int
 
     @get:LayoutRes
     protected abstract val layoutId: Int
@@ -20,7 +21,7 @@ abstract class BaseActivity<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         super.onCreate(savedInstanceState)
         if (::viewBinding.isInitialized.not()) {
             viewBinding = DataBindingUtil.setContentView(this, layoutId)
-            viewBinding.setVariable(BR.viewModel, viewModel)
+            viewBinding.setVariable(bindingVariable, viewModel)
         }
     }
 }

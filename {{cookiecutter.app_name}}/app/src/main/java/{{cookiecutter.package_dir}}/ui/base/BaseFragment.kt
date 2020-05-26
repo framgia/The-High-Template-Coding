@@ -8,7 +8,6 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import {{cookiecutter.package_name}}.BR
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> :
     Fragment() {
@@ -16,6 +15,8 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     protected lateinit var viewBinding: ViewBinding
 
     protected abstract val viewModel: ViewModel
+
+    protected abstract val bindingVariable: Int
 
     @get:LayoutRes
     protected abstract val layoutId: Int
@@ -28,7 +29,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         if (::viewBinding.isInitialized.not()) {
             viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
             viewBinding.apply {
-                setVariable(BR.viewModel, viewModel)
+                setVariable(bindingVariable, viewModel)
                 root.isClickable = true
                 lifecycleOwner = viewLifecycleOwner
                 executePendingBindings()
