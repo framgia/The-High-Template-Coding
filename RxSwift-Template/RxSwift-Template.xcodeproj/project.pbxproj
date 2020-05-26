@@ -33,6 +33,17 @@
 		9C376C33246A507C0037F438 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C376C32246A507C0037F438 /* EndPoint.swift */; };
 		9C49E6A9246E1AA600CCB652 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C49E6A8246E1AA600CCB652 /* ErrorTracker.swift */; };
 		9C49E6AB246E1C0B00CCB652 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C49E6AA246E1C0B00CCB652 /* ActivityIndicator.swift */; };
+		9C8D31F0247CC970004FCD5D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D31EF247CC970004FCD5D /* User.swift */; };
+		9C8D31F3247CCD91004FCD5D /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D31F2247CCD91004FCD5D /* RealmManager.swift */; };
+		9C8D31F7247CCE0F004FCD5D /* RUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D31F6247CCE0F004FCD5D /* RUser.swift */; };
+		9C8D31F9247CD2A1004FCD5D /* GlobalConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D31F8247CD2A1004FCD5D /* GlobalConfig.swift */; };
+		9C8D31FD247CE8F4004FCD5D /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C8D31FC247CE8F4004FCD5D /* Login.storyboard */; };
+		9C8D31FF247CE928004FCD5D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D31FE247CE928004FCD5D /* LoginViewController.swift */; };
+		9C8D3201247CE934004FCD5D /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D3200247CE934004FCD5D /* LoginViewModel.swift */; };
+		9C8D3203247CE997004FCD5D /* LoginNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D3202247CE997004FCD5D /* LoginNavigator.swift */; };
+		9C8D3205247CE9A3004FCD5D /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D3204247CE9A3004FCD5D /* LoginUseCase.swift */; };
+		9C8D3207247CE9AE004FCD5D /* LoginAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D3206247CE9AE004FCD5D /* LoginAssembler.swift */; };
+		9C8D320A247CFBD7004FCD5D /* LoginError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C8D3209247CFBD7004FCD5D /* LoginError.swift */; };
 		9CA37F0A243C7A80003F565F /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA37F09243C7A80003F565F /* UIViewController+Rx.swift */; };
 		9CC82B45243AD3B800D95996 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC82B44243AD3B800D95996 /* AppDelegate.swift */; };
 		9CC82B4E243AD3BD00D95996 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9CC82B4D243AD3BD00D95996 /* Assets.xcassets */; };
@@ -106,6 +117,17 @@
 		9C376C32246A507C0037F438 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EndPoint.swift; path = Services/API/EndPoint.swift; sourceTree = SOURCE_ROOT; };
 		9C49E6A8246E1AA600CCB652 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
 		9C49E6AA246E1C0B00CCB652 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		9C8D31EF247CC970004FCD5D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		9C8D31F2247CCD91004FCD5D /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		9C8D31F6247CCE0F004FCD5D /* RUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RUser.swift; sourceTree = "<group>"; };
+		9C8D31F8247CD2A1004FCD5D /* GlobalConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConfig.swift; sourceTree = "<group>"; };
+		9C8D31FC247CE8F4004FCD5D /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		9C8D31FE247CE928004FCD5D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		9C8D3200247CE934004FCD5D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		9C8D3202247CE997004FCD5D /* LoginNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNavigator.swift; sourceTree = "<group>"; };
+		9C8D3204247CE9A3004FCD5D /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		9C8D3206247CE9AE004FCD5D /* LoginAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAssembler.swift; sourceTree = "<group>"; };
+		9C8D3209247CFBD7004FCD5D /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginError.swift; path = Services/Validate/LoginError.swift; sourceTree = SOURCE_ROOT; };
 		9CA37F09243C7A80003F565F /* UIViewController+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		9CC82B41243AD3B800D95996 /* RxSwift-Template Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RxSwift-Template Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9CC82B44243AD3B800D95996 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -199,8 +221,63 @@
 			isa = PBXGroup;
 			children = (
 				9C21BDA6245049050088D4B9 /* Repo.swift */,
+				9C8D31F1247CCD78004FCD5D /* RealmModel */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		9C8D31F1247CCD78004FCD5D /* RealmModel */ = {
+			isa = PBXGroup;
+			children = (
+				9C8D31F2247CCD91004FCD5D /* RealmManager.swift */,
+				9C8D31F5247CCDBE004FCD5D /* Model */,
+				9C8D31F4247CCDB4004FCD5D /* Entity */,
+			);
+			path = RealmModel;
+			sourceTree = "<group>";
+		};
+		9C8D31F4247CCDB4004FCD5D /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				9C8D31EF247CC970004FCD5D /* User.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		9C8D31F5247CCDBE004FCD5D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9C8D31F6247CCE0F004FCD5D /* RUser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		9C8D31FA247CD2A6004FCD5D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				9C8D31F8247CD2A1004FCD5D /* GlobalConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		9C8D31FB247CE880004FCD5D /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9C8D31FE247CE928004FCD5D /* LoginViewController.swift */,
+				9C8D3200247CE934004FCD5D /* LoginViewModel.swift */,
+				9C8D3202247CE997004FCD5D /* LoginNavigator.swift */,
+				9C8D3204247CE9A3004FCD5D /* LoginUseCase.swift */,
+				9C8D3206247CE9AE004FCD5D /* LoginAssembler.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		9C8D3208247CFBC4004FCD5D /* Validate */ = {
+			isa = PBXGroup;
+			children = (
+				9C8D3209247CFBD7004FCD5D /* LoginError.swift */,
+			);
+			path = Validate;
 			sourceTree = "<group>";
 		};
 		9CC82B38243AD3B800D95996 = {
@@ -226,6 +303,7 @@
 		9CC82B43243AD3B800D95996 /* RxSwift-Template */ = {
 			isa = PBXGroup;
 			children = (
+				9C8D31FA247CD2A6004FCD5D /* Config */,
 				9C21BD98244FFE9C0088D4B9 /* Define */,
 				9CC82B6B243AD47A00D95996 /* Assembler */,
 				9CC82B6A243AD45E00D95996 /* Support */,
@@ -256,6 +334,7 @@
 		9CC82B66243AD41100D95996 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9C8D31FB247CE880004FCD5D /* Login */,
 				9CC82B70243ADA6100D95996 /* App */,
 				9CC82B6D243ADA0A00D95996 /* Storyboard */,
 				9CC82B6C243AD48F00D95996 /* Main */,
@@ -335,6 +414,7 @@
 			children = (
 				0E49D33F2461498000936391 /* Main.storyboard */,
 				9CC82B89243AE67700D95996 /* Storyboard.swift */,
+				9C8D31FC247CE8F4004FCD5D /* Login.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
@@ -369,6 +449,7 @@
 		9CC82B8F243B096600D95996 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9C8D3208247CFBC4004FCD5D /* Validate */,
 				9C21BD91244FFCDD0088D4B9 /* API */,
 			);
 			path = Services;
@@ -496,6 +577,7 @@
 			files = (
 				0E49D32E24613F1800936391 /* Localizable.strings in Resources */,
 				0E49D3412461498000936391 /* Main.storyboard in Resources */,
+				9C8D31FD247CE8F4004FCD5D /* Login.storyboard in Resources */,
 				9CC82B51243AD3BD00D95996 /* LaunchScreen.storyboard in Resources */,
 				9CC82B4E243AD3BD00D95996 /* Assets.xcassets in Resources */,
 				9C21BDB0245079810088D4B9 /* RepoCell.xib in Resources */,
@@ -597,6 +679,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C8D31FF247CE928004FCD5D /* LoginViewController.swift in Sources */,
 				9C49E6AB246E1C0B00CCB652 /* ActivityIndicator.swift in Sources */,
 				9CC82B93243B128100D95996 /* UIViewController+.swift in Sources */,
 				9C21BDA7245049050088D4B9 /* Repo.swift in Sources */,
@@ -610,18 +693,24 @@
 				9CC82B91243B0AC800D95996 /* Utils.swift in Sources */,
 				9C08FFFB246957C500E4E051 /* ViewModelType.swift in Sources */,
 				9CC82B8A243AE67700D95996 /* Storyboard.swift in Sources */,
+				9C8D3207247CE9AE004FCD5D /* LoginAssembler.swift in Sources */,
 				9C376C33246A507C0037F438 /* EndPoint.swift in Sources */,
 				9C21BDB3245079E10088D4B9 /* RepoViewModel.swift in Sources */,
+				9C8D31F7247CCE0F004FCD5D /* RUser.swift in Sources */,
 				9CA37F0A243C7A80003F565F /* UIViewController+Rx.swift in Sources */,
 				9CC82B75243ADA8000D95996 /* AppUseCase.swift in Sources */,
 				9CC82B84243AE62300D95996 /* MainViewModel.swift in Sources */,
+				9C8D3201247CE934004FCD5D /* LoginViewModel.swift in Sources */,
+				9C8D31F0247CC970004FCD5D /* User.swift in Sources */,
 				9C08FFF6246941C200E4E051 /* NetworkingManager.swift in Sources */,
 				9CC82B77243ADA8000D95996 /* AppAssembler.swift in Sources */,
 				9C21BDAD245049E70088D4B9 /* RepoRepository.swift in Sources */,
 				9CC82B81243AE5D800D95996 /* MainViewController.swift in Sources */,
 				9C376C31246A4F1D0037F438 /* ObservableType+.swift in Sources */,
 				9CC82B8C243B030500D95996 /* MainAssembler.swift in Sources */,
+				9C8D31F9247CD2A1004FCD5D /* GlobalConfig.swift in Sources */,
 				9C21BDA524502A010088D4B9 /* RepositoryAssembler.swift in Sources */,
+				9C8D31F3247CCD91004FCD5D /* RealmManager.swift in Sources */,
 				9C376C2D246A3EEE0037F438 /* ResponseData.swift in Sources */,
 				9C21BDB524507A640088D4B9 /* UIImageView+SDWebImage.swift in Sources */,
 				0E49D3342461410800936391 /* String+Ext.swift in Sources */,
@@ -630,10 +719,13 @@
 				9C376C2F246A404A0037F438 /* Driver+.swift in Sources */,
 				9CC82B86243AE62F00D95996 /* MainUseCase.swift in Sources */,
 				9C49E6A9246E1AA600CCB652 /* ErrorTracker.swift in Sources */,
+				9C8D320A247CFBD7004FCD5D /* LoginError.swift in Sources */,
+				9C8D3203247CE997004FCD5D /* LoginNavigator.swift in Sources */,
 				9CC82B88243AE64000D95996 /* MainNavigator.swift in Sources */,
 				9CC82B76243ADA8000D95996 /* AppNavigator.swift in Sources */,
 				9C08FFF02469412B00E4E051 /* APIError.swift in Sources */,
 				9C21BD9A244FFE9C0088D4B9 /* Constants.swift in Sources */,
+				9C8D3205247CE9A3004FCD5D /* LoginUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
