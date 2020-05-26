@@ -46,7 +46,10 @@ In file `fastlane/.env.secret` additional some key , follow table above :
 | `CHATWORK_SEND_TO_TESTER`     |  List UserId ChatWord you want send direct message |      |
 | `BUILD_IOS_NAME`     |   |      |
 | `SCHEME_NAME_IOS`     |   |      |
-
+|`DEYPLOYGATE_API_KEY`      |   |   [API in Setting](https://deploygate.com/settings)||
+|`DISTRIBUTION_KEY_STG`|  *Optional: This key use to upload ipa specification to a distribution version |   |  
+|`DISTRIBUTION_KEY_DEV`|  *Optional: This key use to upload ipa specification to a distribution version |   |  
+|`DEPLOYGATE_USER`|  Target username or organization name | [Fastlane deploygate](https://docs.fastlane.tools/actions/deploygate/)  |  
 #### Run fastlane 
 In root project , run command : 
 
@@ -65,3 +68,9 @@ Description  lane
 | develop , staging ,production | Platform iOS/Android  lane  will run build and distribute to Firebase for each environment develop ,staging,production|       |
 | buildAppDevelop , buildAppStaging , buildAppProduction | Platform iOS/Android only build and generate APK/ipa file  |   |
 | uploadFirebaseDevelop , uploadFirebaseStaging , uploadFirebaseProduction | Platform iOS/Android only distribute to Firebase|      |
+
+## Other actions:
+### Deploygate
+To upload build to Deploygate, please open Fastfile and: 
+- change action `uploadFirebaseDevelop` to `uploadDeploygateDev` in lane `develop`
+- change action `uploadFirebaseStaging` to `uploadDeploygateStaging` in lane `staging`

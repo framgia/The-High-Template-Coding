@@ -236,6 +236,40 @@ lane :buildAppProduction do
 end
 #++++++++++++++++++++
 
+lane :uploadDeploygateDev do |options|
+  releaseNote = File.read("./temp/releaseNote.txt")
+  deploygate(
+        api_token: "#{ENV['DEYPLOYGATE_API_KEY']}",
+        user: "#{ENV['DEYPLOYGATE_USER']}",
+        ipa: "#{ENV['BUILD_IOS_NAME']}.ipa",
+        message: releaseNote,
+        distribution_key: "#{ENV['DISTRIBUTION_KEY_DEV']}"
+    )
+  begin
+    pushChatwork
+  rescue => ex
+    UI.error(ex)
+  end
+end
+#++++++++++++++++++++
+
+lane :uploadDeploygateStaging do |options|
+  releaseNote = File.read("./temp/releaseNote.txt")
+  deploygate(
+        api_token: "#{ENV['DEYPLOYGATE_API_KEY']}",
+        user: "#{ENV['DEYPLOYGATE_USER']}",
+        ipa: "#{ENV['BUILD_IOS_NAME']}.ipa",
+        message: releaseNote,
+        distribution_key: "#{ENV['DISTRIBUTION_KEY_STG']}"
+    )
+  begin
+    pushChatwork
+  rescue => ex
+    UI.error(ex)
+  end
+end
+#++++++++++++++++++++
+
 end
 
 {% endif %}
