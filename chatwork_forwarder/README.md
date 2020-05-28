@@ -3,12 +3,12 @@
 ### Link: https://cw-forwarder.sun-asterisk.vn
 ### Chatwork forwarder configuration steps:
 # Pre-condition:  
-1. Chatwork Bot Token
-2. Add Bot to project
+1. Chatwork Bot Token (Create a chatwork account then get api token in Settings)
+2. Add chatwork bot to your project
 3. Github repo (your account role must be an admin or owner)
 
 # Config
-### Step 1: Create Bot
+### Step 1: Create Bot in Chatwork Forwarder
 - In the dashboard, click Bots and then create a bot.
 - Enter Bot name and Bot Token (Bot Key)
 ![ICreate bot](s1.png)
