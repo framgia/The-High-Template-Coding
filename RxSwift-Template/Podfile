@@ -12,6 +12,7 @@ target 'RxSwift-Template' do
   pod 'NSObject+Rx', '~> 5.0'
   pod 'RxCocoa', '~> 5.0'
   pod 'RxSwift', '5.1'
+  pod "RxRealm", '2.0.0'
     
   # Core
   pod 'Reusable', '~> 4.1'

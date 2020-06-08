@@ -6,9 +6,14 @@
 //  Copyright © 2020 nguyen.the.trinh. All rights reserved.
 //
 
+enum DataName {
+    static let user = "RUser"
+}
+
 enum Title {
     static let error = "Error"
     static let ok = "OK"
+    static let login = "Login"
 }
 
 struct JSONKey {

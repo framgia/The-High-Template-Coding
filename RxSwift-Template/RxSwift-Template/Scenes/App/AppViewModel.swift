@@ -24,7 +24,7 @@ extension AppViewModel: ViewModelType {
     func transform(_ input: Input) -> Output {
         let toMain = input.loadTrigger
             .mapToVoid()
-            .do(onNext: self.navigator.toMain)
+            .do(onNext: self.navigator.toLogin)
         
         return Output(toMain: toMain)
     }

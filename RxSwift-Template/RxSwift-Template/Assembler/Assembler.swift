@@ -9,6 +9,7 @@
 protocol Assembler: class,
     MainAssembler,
     RepositoriesAssembler,
+    LoginAssembler,
     AppAssembler {
 }
 
