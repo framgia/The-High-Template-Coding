@@ -4,7 +4,7 @@ import {{cookiecutter.package_name}}.data.model.Post
 import retrofit2.http.GET
 
 /**
- * Sample interface apiService
+ * Interface apiService for declare api endpoint
  */
 interface ApiServiceInterface {
     @GET("posts")

@@ -4,27 +4,49 @@ import android.content.Context
 import androidx.core.content.edit
 import com.google.gson.Gson
 
-@Suppress("UNCHECKED_CAST")
+/**
+ * Class for accessing and modifying data on local storage
+ * */
 class AppPrefs(
     context: Context,
     val gson: Gson
 ) : PrefsHelper {
 
-    private val sharedPreferences = context.getSharedPreferences(
-        context.packageName,
-        Context.MODE_PRIVATE
-    )
+    private val sharedPreferences by lazy {
+        context.getSharedPreferences(
+                context.packageName,
+                Context.MODE_PRIVATE
+        )
+    }
 
+    /**
+     * Mark in the editor that a preference value should be removed
+     *
+     * @param key The name of the preference to remove.
+     */
     override fun remove(key: String) {
         sharedPreferences.edit {
             remove(key)
         }
     }
 
+    /**
+     * Mark in the editor to remove <em>all</em> values from the
+     * preferences.  Once commit is called, the only remaining preferences
+     * will be any that you have defined in this editor.
+     */
     override fun clear() {
         sharedPreferences.edit { clear() }
     }
 
+    /**
+     * Retrieve an int value from the preferences.
+     * @param key The name of the preference to retrieve.
+     * @param clazz classes instance of data type will be retrieve
+     * @param defaultValue Value to return if this preference does not exist.
+     *
+     * @return Returns the preference value if it exists, or defValue.
+     */
     override fun <T> get(key: String, clazz: Class<T>, defaultValue: T): T? {
         when (clazz) {
             String::class.java -> {
@@ -46,6 +68,12 @@ class AppPrefs(
         }
     }
 
+    /**
+     * Set a generic T value in the preferences editor
+     *
+     * @param key The name of the preference to modify.
+     * @param data The new value for the preference.
+     */
     override fun <T> put(key: String, data: T) {
         val editor = sharedPreferences.edit()
         when (data) {

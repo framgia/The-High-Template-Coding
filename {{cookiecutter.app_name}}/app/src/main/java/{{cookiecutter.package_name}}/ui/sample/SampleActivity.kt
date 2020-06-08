@@ -9,7 +9,7 @@ import {{cookiecutter.package_name}}.BR
 import {{cookiecutter.package_name}}.R
 import {{cookiecutter.package_name}}.databinding.ActivitySampleBinding
 import {{cookiecutter.package_name}}.ui.base.BaseActivity
-import kotlinx.android.synthetic.sample.activity_sample.*
+import kotlinx.android.synthetic.main.activity_sample.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 /**

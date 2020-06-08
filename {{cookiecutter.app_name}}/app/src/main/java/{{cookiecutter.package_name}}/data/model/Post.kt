@@ -14,4 +14,4 @@ data class Post(
     val title: String,
     @SerializedName("body")
     val body: String
-)
+) : BaseModel()

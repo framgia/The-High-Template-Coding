@@ -1,6 +1,7 @@
 package {{cookiecutter.package_name}}.di
 
 import {{cookiecutter.package_name}}.data.remote.ApiService
+import {{cookiecutter.package_name}}.data.remote.ApiServiceInterface
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
