@@ -16,7 +16,9 @@ struct NetworkingManager {
         Logger.info("LINK REQUEST: " + (String(describing: urlConvertible.urlRequest?.url)))
         return Observable<T>.create { observer in
             //Trigger the HttpRequest using AlamoFire (AF)
-            let request = Alamofire.request(urlConvertible).responseJSON { (response) in
+            let request = Alamofire.request(urlConvertible)
+                .validate(statusCode: 200..<300)
+                .responseJSON { (response) in
                 switch response.result {
                 case .success(let value):
                     //Everything is fine, return the value in onNext
@@ -26,17 +28,9 @@ struct NetworkingManager {
                             observer.onError(APIError.error(APIError.parsingDataErrorCode))
                             return
                     }
-                    guard let statusCode = response.response?.statusCode else {
-                        return  observer.onError(APIError.error(APIError.defaultErrorCode))
-                    }
-                    switch statusCode {
-                    case 200..<300:
-                        observer.onNext(data)
-                        observer.onCompleted()
-                    default:
-                        observer.onError(APIError.error(statusCode))
-                    }
-                    
+                    observer.onNext(data)
+                    observer.onCompleted()
+                    return
                 case .failure(let error):
                     //Something went wrong, switch on the status code and return the error
                     if let statusCode = response.response?.statusCode {
