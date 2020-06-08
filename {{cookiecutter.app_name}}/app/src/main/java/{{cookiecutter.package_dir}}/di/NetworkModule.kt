@@ -11,7 +11,7 @@ val networkModule = module {
     single(named("logging")) { ApiService.createLoggingInterceptor() }
     single { ApiService.createOkHttpClient(get(named("header")), get(named("logging"))) }
     single { ApiService.createRetrofit(get()) }
-//    single { createApiService<ApiServiceInterface>(get()) }
+    single { createApiService<ApiServiceInterface>(get()) }
 }
 
 inline fun <reified T> createApiService(retrofit: Retrofit): T =
