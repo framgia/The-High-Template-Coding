@@ -7,6 +7,8 @@ import {{cookiecutter.package_name}}.data.repository.SampleRepository
 import {{cookiecutter.package_name}}.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import android.util.Log
 
 class SampleViewModel(private val repository: SampleRepository) : BaseViewModel() {
     val posts = MutableLiveData<List<Post>>()

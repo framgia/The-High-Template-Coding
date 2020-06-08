@@ -1,6 +1,5 @@
 {
   "app_name": "MyApplication",
   "package_name": "com.sun.myapp",
-  "package_dir": "{{ cookiecutter.package_name | replace('.', '/') }}",
   "_copy_without_render": [".gradle", "gradle/", "*gradlew", "*gradlew.bat"]
 }

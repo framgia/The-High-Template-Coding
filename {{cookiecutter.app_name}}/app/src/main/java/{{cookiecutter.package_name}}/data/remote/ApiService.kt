@@ -11,13 +11,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 /**
- * This is an example of ApiService,
  * Depend on each API, it will be handled particularly
  */
 object ApiService {
 
     private const val TIMEOUT = 10L
 
+    /**
+     * Custom [okhttp3.Interceptor] for special header make safe request
+     */
     fun createHeaderInterceptor(): Interceptor =
         Interceptor { chain ->
             val request = chain.request()
@@ -31,15 +33,24 @@ object ApiService {
             chain.proceed(newRequest)
         }
 
+    /**
+     * logs request and response information
+     * */
     fun createLoggingInterceptor(): Interceptor =
         HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
             else HttpLoggingInterceptor.Level.NONE
         }
 
+    /**
+     * Config cache size
+     * */
     fun createOkHttpCache(context: Context): Cache =
         Cache(context.cacheDir, (10 * 1024 * 1024).toLong())
 
+    /**
+     * Build [okhttp3.OkHttpClient] with custom config
+     * */
     fun createOkHttpClient(
         logging: Interceptor,
         header: Interceptor
@@ -52,6 +63,9 @@ object ApiService {
             .addInterceptor(logging)
             .build()
 
+    /**
+     * Build retrofit
+     * */
     fun createRetrofit(okHttpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
             .baseUrl(BuildConfig.URL_END_POINT)
