@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
 
+/**
+ * Base ViewModel
+ */
 abstract class BaseViewModel : ViewModel() {
     // loading flag
     val isLoading = MutableLiveData<Boolean>().apply { value = false }
