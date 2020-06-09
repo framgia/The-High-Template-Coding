@@ -6,8 +6,6 @@ target 'RxSwift-Template' do
   use_frameworks!
   # Networking
   pod 'Alamofire'
-  pod 'RxAlamofire'
-
   # Rx
   pod 'NSObject+Rx', '~> 5.0'
   pod 'RxCocoa', '~> 5.0'
