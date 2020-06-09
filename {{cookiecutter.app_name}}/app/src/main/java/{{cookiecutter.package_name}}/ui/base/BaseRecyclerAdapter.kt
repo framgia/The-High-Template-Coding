@@ -7,6 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import java.util.concurrent.Executors
 
+/**
+ * Base RecyclerView
+ * @param callBack, Callback for calculating the diff between two non-null items in a list.
+ * @param <T> Type of items to compare.
+ */
 abstract class BaseRecyclerAdapter<T>(
     callBack: DiffUtil.ItemCallback<T>
 ) : ListAdapter<T, BaseViewHolder<ViewDataBinding>>(
@@ -27,7 +32,13 @@ abstract class BaseRecyclerAdapter<T>(
         holder.binding.executePendingBindings()
     }
 
+    /**
+     * Binding layout
+     */
     protected abstract fun createBinding(parent: ViewGroup, viewType: Int? = 0): ViewDataBinding
 
+    /**
+     * Binding variable
+     */
     protected abstract fun bind(binding: ViewDataBinding, item: T)
 }
