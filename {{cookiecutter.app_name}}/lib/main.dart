@@ -7,6 +7,15 @@ import 'ui/app.dart';
 
 void main() async {
   setupLocator();
-  BlocSupervisor.delegate = SimpleBlocDelegate();
-  runApp(MyApp());
+  Bloc.observer = SimpleBlocDelegate();
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthenticationBloc(),
+        )
+      ],
+      child: MyApp(),
+    ),
+  );
 }
