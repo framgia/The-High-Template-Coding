@@ -8,7 +8,7 @@ class HomeRepository {
   //example call api to get data
   Future<String> getData() async {
 //    _network.get(url: "");
-    await Future.delayed((Duration(seconds: 3)));
+    await Future.delayed((Duration(seconds: 1)));
     return "Data loaded";
   }
 }

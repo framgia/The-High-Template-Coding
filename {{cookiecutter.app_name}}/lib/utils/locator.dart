@@ -7,4 +7,5 @@ final GetIt locator = GetIt.instance;
 void setupLocator() {
   locator.registerLazySingleton(() => Network());
   locator.registerLazySingleton(() => HomeRepository(locator<Network>()));
+  locator.registerLazySingleton(() => AuthenticationRepository());
 }

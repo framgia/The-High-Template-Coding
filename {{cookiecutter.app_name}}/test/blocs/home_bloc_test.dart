@@ -24,18 +24,18 @@ main() {
       expect(homeBloc.state, InitState());
     });
     group("test event GetData", () {
-      blocTest(
+      blocTest<HomeBloc, BaseState>(
         "emits [LoadingState, LoadedState] when GetData success",
-        build: () async {
+        build: () {
           when(repository.getData()).thenAnswer((_) => Future.value(successData));
           return homeBloc;
         },
         act: (bloc) => bloc.add(GetData()),
         expect: [LoadingState(), LoadedState<String>(data: successData)],
       );
-      blocTest(
+      blocTest<HomeBloc, BaseState>(
         "emits [LoadingState, ErrorState] when GetData failure",
-        build: () async {
+        build: () {
           when(repository.getData()).thenThrow(errorData);
           return homeBloc;
         },

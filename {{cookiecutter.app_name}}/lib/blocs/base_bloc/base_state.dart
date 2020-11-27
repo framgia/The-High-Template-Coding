@@ -8,14 +8,18 @@ abstract class BaseState extends Equatable {
   List<Object> get props => [];
 }
 
-class InitState extends BaseState {}
+class InitState extends BaseState {
+  const InitState();
+}
 
-class LoadingState extends BaseState {}
+class LoadingState extends BaseState {
+  const LoadingState();
+}
 
 class LoadedState<T> extends BaseState {
   final T data;
 
-  LoadedState({@required this.data}) : assert(data != null);
+  const LoadedState({@required this.data}) : assert(data != null);
 
   @override
   List<Object> get props => [data];
@@ -24,7 +28,16 @@ class LoadedState<T> extends BaseState {
 class ErrorState<T> extends BaseState {
   final T data;
 
-  ErrorState({@required this.data}) : assert(data != null);
+  const ErrorState({@required this.data}) : assert(data != null);
+
+  @override
+  List<Object> get props => [data];
+}
+
+class InputState<T> extends BaseState {
+  final T data;
+
+  const InputState({this.data});
 
   @override
   List<Object> get props => [data];
