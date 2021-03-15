@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="post"
+            type="com.sun.data.model.Post" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_4"
+        android:layout_marginBottom="@dimen/dp_4"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/userId"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{Html.fromHtml(@string/format_content(`userId`, post.userId + ``))}"
+            tools:text="userId" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/id"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{Html.fromHtml(@string/format_content(`id`, post.id + ``))}"
+            tools:text="id" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{Html.fromHtml(@string/format_content(`title`, post.title))}"
+            tools:text="title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/body"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{Html.fromHtml(@string/format_content(`body`, post.body))}"
+            tools:text="body" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">android-sample-base</string>
+    <string name="format_content"><![CDATA[<b><font color=#FF0000>%s:</b>]]> %s</string>
+</resources>
