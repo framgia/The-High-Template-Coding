@@ -9,8 +9,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.util.Log
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SampleViewModel(private val repository: SampleRepository) : BaseViewModel() {
+@HiltViewModel
+class SampleViewModel @Inject constructor(
+    private val repository: SampleRepository
+) : BaseViewModel() {
     val posts = MutableLiveData<List<Post>>()
 
     init {

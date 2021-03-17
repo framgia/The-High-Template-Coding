@@ -1,27 +1,65 @@
 package com.sun.di
 
+import com.google.gson.Gson
 import com.sun.data.remote.ApiService
 import com.sun.data.remote.ApiServiceInterface
-import org.koin.core.qualifier.named
-import org.koin.dsl.module
+import com.sun.ui.base.BaseSourceApi
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 /**
  * Declare network component
- * @param get() is a component given
- * @see named() is used to name a component when declare, can get component by name declared
  */
-val networkModule = module {
-//    single { createOkHttpCache(get()) }
-    single(named("header")) { ApiService.createHeaderInterceptor() } //Naming to identity element
-    single(named("logging")) { ApiService.createLoggingInterceptor() }
-    single { ApiService.createOkHttpClient(get(named("header")), get(named("logging"))) }
-    single { ApiService.createRetrofit(get()) }
-    single { createApiService<ApiServiceInterface>(get()) }
-}
+@Module
+@InstallIn(SingletonComponent::class)
+class NetworkModule {
 
-/**
- * Create api service
- */
-inline fun <reified T> createApiService(retrofit: Retrofit): T =
-    retrofit.create(T::class.java)
+    @Provides
+    @Singleton
+    fun provideGson(): Gson = Gson()
+
+    @Provides
+    @Singleton
+    @BaseSourceApi("logging")
+    fun provideLogging(): Interceptor {
+        return ApiService.createLoggingInterceptor()
+    }
+
+    @Provides
+    @Singleton
+    @BaseSourceApi("header")
+    fun provideHeader(): Interceptor {
+        return ApiService.createHeaderInterceptor()
+    }
+
+    @Provides
+    @Singleton
+    @BaseSourceApi("sample")
+    fun provideSampleOkHttpClient(
+        @BaseSourceApi("logging") logging: Interceptor,
+        @BaseSourceApi("header") header: Interceptor
+    ): OkHttpClient {
+        return ApiService.createOkHttpClient(logging, header)
+    }
+
+    @Provides
+    @Singleton
+    @BaseSourceApi("sample")
+    fun provideSampleRetrofit(
+        @BaseSourceApi("sample") okHttpClient: OkHttpClient
+    ): Retrofit {
+        return ApiService.createRetrofit(okHttpClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiService(@BaseSourceApi("sample") retrofit: Retrofit): ApiServiceInterface {
+        return retrofit.create(ApiServiceInterface::class.java)
+    }
+}
