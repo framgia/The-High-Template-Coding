@@ -2,12 +2,18 @@ package com.sun.di
 
 import com.sun.data.repository.SampleRepository
 import com.sun.data.repository.impl.SampleRepositoryImpl
-import org.koin.dsl.module
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
 /**
  * Declare repository component
- * @param get() is a component given
  */
-val repositoryModule = module {
-    single<SampleRepository> { SampleRepositoryImpl(get()) }
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class RepositoryModule {
+
+    @Binds
+    abstract fun provideSampleRepository(sampleRepositoryImpl: SampleRepositoryImpl): SampleRepository
 }

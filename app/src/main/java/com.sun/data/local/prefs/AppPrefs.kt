@@ -3,12 +3,16 @@ package com.sun.data.local.prefs
 import android.content.Context
 import androidx.core.content.edit
 import com.google.gson.Gson
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
  * Class for accessing and modifying data on local storage
  * */
-class AppPrefs(
-    context: Context,
+@Singleton
+class AppPrefs @Inject constructor(
+    @ApplicationContext context: Context,
     val gson: Gson
 ) : PrefsHelper {
 

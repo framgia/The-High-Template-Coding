@@ -1,22 +1,11 @@
 package com.sun
 
 import android.app.Application
-import com.sun.di.appModules
-import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
-import org.koin.core.context.startKoin
+import dagger.hilt.android.HiltAndroidApp
 
 /**
- * Declare application context of app
- * start Koin injection by startKoin {} DSL
+ * Use Hilt must contain an Application class that is annotated with @HiltAndroidApp
+ * @HiltAndroidApp triggers Hilt's code generation
  */
-class MainApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-        startKoin {
-            androidLogger() //Koin log
-            androidContext(this@MainApplication) //declare used Android context
-            modules(appModules) //declare modules
-        }
-    }
-}
+@HiltAndroidApp
+class MainApplication : Application()
