@@ -25,6 +25,16 @@ abstract class BaseViewModel : ViewModel() {
     // viewModelScope with exception handler
     protected val viewModelScopeExceptionHandler = viewModelScope + exceptionHandler
 
+    protected fun executeTask(needBlock: Boolean = false, block: suspend CoroutineScope.() -> Unit) {
+        viewModelScopeExceptionHandler.launch {
+            if (needBlock) showLoading()
+            withContext(Dispatchers.IO) {
+                block()
+                if (needBlock) isLoading.postValue(false)
+            }
+        }
+    }
+
     /**
      * handle throwable when load fail
      */
