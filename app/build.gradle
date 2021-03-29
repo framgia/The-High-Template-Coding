@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId "com.sun"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -81,40 +81,48 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+
+    packagingOptions {
+        exclude 'META-INF/AL2.0'
+        exclude 'META-INF/LGPL2.1'
+    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    implementation "androidx.core:core-ktx:$core_ktx_version"
-    implementation "androidx.fragment:fragment-ktx:$fragment_ktx"
-    implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
+    implementation kotlin_lib
+    implementation appcompat
+    implementation ktx
+    implementation fragment_ktx
+    implementation constraint_layout
+    implementation recycler_view
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 
-    implementation"androidx.recyclerview:recyclerview:$recyclerview_version"
-
     //Hilt
-    implementation "com.google.dagger:hilt-android:$hilt_version"
-    kapt "com.google.dagger:hilt-compiler:$hilt_version"
+    implementation hilt_lib
+    kapt hilt_android_compiler
 
-    //Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$converter_gson_version"
+    // Retrofit
+    implementation retrofit
+    implementation gson_converter
+    implementation gson
 
-    //Logging
-    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor_version"
+    // Logging
+    implementation logging_interceptor
 
-    //Gson
-    implementation "com.google.code.gson:gson:$gson_version"
+    // Google Architecture Components
+    implementation live_data
+    implementation view_model
 
-    // ViewModel and LiveData
-    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+    // Coroutines
+    implementation coroutines
+    implementation coroutines_android
+    implementation coroutines_test
 
-    //Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_android_versions"
+    // Navigation Components
+    implementation navigation_fragment
+    implementation navigation_ui
 }

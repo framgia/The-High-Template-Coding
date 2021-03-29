@@ -6,7 +6,6 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sun.BR
 import com.sun.R
 import com.sun.databinding.ActivitySampleBinding
 import com.sun.ui.base.BaseActivity
@@ -20,7 +19,6 @@ import kotlinx.android.synthetic.main.activity_sample.*
 @AndroidEntryPoint
 class SampleActivity : BaseActivity<ActivitySampleBinding, SampleViewModel>() {
     override val viewModel: SampleViewModel by viewModels()
-    override val bindingVariable = BR.viewModel
     override val layoutId = R.layout.activity_sample
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -18,9 +18,6 @@ abstract class BaseActivity<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     //ViewModel using in screen
     protected abstract val viewModel: ViewModel
 
-    //Variable is declare on binding view, example BR.viewModel
-    protected abstract val bindingVariable: Int
-
     //LayoutId of screen, example R.layout.screen
     @get:LayoutRes
     protected abstract val layoutId: Int
@@ -29,7 +26,6 @@ abstract class BaseActivity<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         super.onCreate(savedInstanceState)
         if (::viewBinding.isInitialized.not()) {
             viewBinding = DataBindingUtil.setContentView(this, layoutId)
-            viewBinding.setVariable(bindingVariable, viewModel)
         }
     }
 }
