@@ -125,4 +125,9 @@ dependencies {
     // Navigation Components
     implementation navigation_fragment
     implementation navigation_ui
+
+    // Room Database
+    implementation room_runtime
+    implementation room_ktx
+    kapt room_compiler
 }
