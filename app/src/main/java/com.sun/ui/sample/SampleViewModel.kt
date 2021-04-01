@@ -29,7 +29,9 @@ class SampleViewModel @Inject constructor(
     private fun getPosts() {
         viewModelScopeExceptionHandler.launch {
             withContext(Dispatchers.IO){
-                posts.postValue(repository.getPosts())
+                val listPost = repository.getPosts()
+                posts.postValue(listPost)
+                repository.addPostsToDatabase(listPost)
             }
         }
     }
