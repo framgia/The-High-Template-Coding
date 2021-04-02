@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/splash_nav_graph"
     app:startDestination="@id/splashNavFragment">
 
     <fragment
         android:id="@+id/splashNavFragment"
         android:name="com.sun.ui.splash.fragment.SplashNavFragment"
         android:label="SplashFragment">
+
         <action
             android:id="@+id/openSample"
             app:destination="@id/sampleActivity"
@@ -15,6 +15,15 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="exampleName"
+            android:defaultValue="@string/app_name"
+            app:argType="string"
+            app:nullable="true" />
+
+        <deepLink android:autoVerify="true"
+            app:uri="www.com.sun-asterisk/base/{exampleName}" />
     </fragment>
 
 <!--    <fragment-->
