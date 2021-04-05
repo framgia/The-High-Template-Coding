@@ -1,4 +1,4 @@
-package com.sun.ui.sample
+package com.sun.ui.sample.activity
 
 import android.os.Bundle
 import android.widget.Toast

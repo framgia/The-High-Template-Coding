@@ -1,4 +1,4 @@
-package com.sun.ui.sample
+package com.sun.ui.sample.activity
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

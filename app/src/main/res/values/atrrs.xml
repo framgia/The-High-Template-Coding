@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ValidatorEditText">
+        <attr name="validator" format="enum">
+            <enum name="empty" value="0"/>
+            <enum name="email" value="1"/>
+            <enum name="password" value="2"/>
+            <enum name="confirm_password" value="3"/>
+        </attr>
+        <attr name="android:inputType" format="reference" />
+    </declare-styleable>
+</resources>
