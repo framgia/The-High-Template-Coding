@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.sun.ui.sample.SampleViewModel" />
+            type="com.sun.ui.sample.activity.SampleViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:paddingStart="@dimen/dp_16"
         android:paddingEnd="@dimen/dp_16"
-        tools:context=".ui.sample.SampleActivity">
+        tools:context=".ui.sample.activity.SampleActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPosts"

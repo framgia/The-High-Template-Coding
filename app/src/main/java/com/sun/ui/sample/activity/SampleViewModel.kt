@@ -1,4 +1,4 @@
-package com.sun.ui.sample
+package com.sun.ui.sample.activity
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
