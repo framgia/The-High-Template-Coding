@@ -1,0 +1,88 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:android)
+
+before_all do
+  Dotenv.overload '.env'
+end
+
+platform :android do
+
+  releaseNoteInput = ""
+
+#build develop
+  desc "Build App Develop Debug"
+  lane :distributeDevDebug do
+    gradle(task: 'clean' )
+    gradle(task: 'assemble', flavor: "Develop", build_type: 'Debug')
+    writeReleaseNote()
+    buildApk(releaseNote:releaseNoteInput, id:ENV['FIREBASE_APP_ID_DEV'])
+    notifyCW(flavor:"Develop Debug")
+  end
+
+#build staging
+  desc "Build App Staging Debug"
+  lane :distributeStagingDebug do
+    gradle(task: 'clean' )
+    gradle(task: 'assemble', flavor: "Staging", build_type: 'Debug')
+    writeReleaseNote()
+    buildApk(releaseNote:releaseNoteInput, id:ENV['FIREBASE_APP_ID_STAGING'])
+    notifyCW(flavor:"Staging Debug")
+  end
+
+#build product
+  desc "Build App Product Debug"
+  lane :distributeProductDebug do
+    gradle(task: 'clean' )
+    gradle(task: 'assemble', flavor: "Product", build_type: 'Debug')
+    writeReleaseNote()
+    buildApk(releaseNote:releaseNoteInput, id:ENV['FIREBASE_APP_ID_PRODUCT'])
+    notifyCW(flavor:"Product Debug")
+  end
+
+  desc "Write release notes"
+  lane :writeReleaseNote do
+    releaseNoteInput = prompt(
+       text: "This note will be pushed on Firebase, please enter your release notes: ",
+       multi_line_end_keyword: "end"
+    )
+  end
+
+  desc "Upload file .apk to Firebase"
+  lane :buildApk do |values|
+    releaseNote = values[:releaseNote]
+    id = values[:id]
+    firebase_app_distribution(
+        app: "#{id}",
+        testers: "#{ENV['LIST_EMAIL_TESTER']}",
+        release_notes: "#{releaseNote}",
+        apk_path: Actions.lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+    )
+  end
+
+  desc "Notification on chatwork "
+    lane :notifyCW do |values|
+      flavor = values[:flavor]
+      chatwork(
+        message: "[toall]
+        - Android version 1.0.0 Build (200)
+        - Flavor: #{flavor}", #change with your message
+        roomid: "#{ENV['CHATWORK_ROOM_ID']}", #change with your room id
+        success: true,
+        api_token: "#{ENV['CHATWORK_API_TOKEN']}" #api token of chatbot (change your api chatwork in file .env)
+      )
+  end
+end

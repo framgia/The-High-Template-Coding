@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
@@ -125,4 +127,10 @@ dependencies {
     // Navigation Components
     implementation navigation_fragment
     implementation navigation_ui
+
+    // Firebase
+    implementation platform(firebase_bom)
+    implementation firebase_messaging
+    implementation firebase_analytics
+    implementation firebase_crashlytics
 }
