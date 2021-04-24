@@ -41,4 +41,9 @@ class SampleActivity : BaseActivity<ActivitySampleBinding, SampleViewModel>() {
             }
         })
     }
+
+    override fun onDestroy() {
+        networkConnectionUtil.unregisterNetworkCallListener()
+        super.onDestroy()
+    }
 }

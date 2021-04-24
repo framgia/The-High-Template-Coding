@@ -5,12 +5,17 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.sun.utils.NetworkConnectionUtil
+import javax.inject.Inject
 
 /**
  * Base Activity
  */
 abstract class BaseActivity<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> :
     AppCompatActivity() {
+
+    @Inject
+    lateinit var networkConnectionUtil: NetworkConnectionUtil
 
     //Binding view
     protected lateinit var viewBinding: ViewBinding
