@@ -8,10 +8,10 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import com.sun.R
-import com.sun.common.Constant
 import com.sun.databinding.UiValidatorEditTextBinding
 import com.sun.extensions.isValidPassword
 import com.sun.extensions.isEmail
+import com.sun.utils.Constants
 
 class ValidatorEditText: FrameLayout, ValidatorView {
 
@@ -20,7 +20,7 @@ class ValidatorEditText: FrameLayout, ValidatorView {
         EMPTY(0), EMAIL(1), PASSWORD(2), CONFIRM_PASSWORD(3)
     }
 
-    var validator = Constant.VALUE_DEFAULT_INVALID
+    var validator = Constants.VALUE_DEFAULT_INVALID
     var text: String
         set(value) = contentView.textContent.setText(value)
         get() = contentView.textContent.text.toString().trim()
@@ -56,7 +56,7 @@ class ValidatorEditText: FrameLayout, ValidatorView {
         contentView.isVisible = false
         attrs?.let {
             val arr = context.resources.obtainAttributes(attrs, R.styleable.ValidatorEditText)
-            validator = arr.getInt(R.styleable.ValidatorEditText_validator, Constant.VALUE_DEFAULT_INVALID)
+            validator = arr.getInt(R.styleable.ValidatorEditText_validator, Constants.VALUE_DEFAULT_INVALID)
             contentView.textContent.apply {
                 inputType = if (validator == Type.EMAIL.value) {
                     EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
@@ -77,7 +77,7 @@ class ValidatorEditText: FrameLayout, ValidatorView {
             return true
         }
         contentView.textContent.text.toString().apply {
-            if (validator != Constant.VALUE_DEFAULT_INVALID && (isNullOrEmpty() || isNullOrBlank())) {
+            if (validator != Constants.VALUE_DEFAULT_INVALID && (isNullOrBlank())) {
                 contentView.textError.text = "Error empty!"
                 contentView.isVisible = true
                 return false

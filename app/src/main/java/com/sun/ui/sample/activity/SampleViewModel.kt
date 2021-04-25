@@ -9,6 +9,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.paging.PagingData
+import com.sun.data.model.Repo
+import com.sun.ui.base.BasePagingAdapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -31,6 +35,16 @@ class SampleViewModel @Inject constructor(
             withContext(Dispatchers.IO){
                 posts.postValue(repository.getPosts())
             }
+        }
+    }
+
+    /**
+     * Get list post from api, using Paging 3 to get paginated data flow page number
+     * @param adapter: passing reference of adapter to this paging source to update data local
+     */
+    fun getPostsPaging(adapter: BasePagingAdapter<Repo>): LiveData<PagingData<Repo>> {
+        return getPagingResult(adapter) {
+            repository.getPostsPaging(adapter, it)
         }
     }
 
