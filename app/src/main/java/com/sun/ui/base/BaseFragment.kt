@@ -8,12 +8,18 @@ import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.sun.utils.ConnectionType
+import com.sun.utils.NetworkConnectionUtil
+import javax.inject.Inject
 
 /**
  * Base Fragment
  */
 abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> :
     Fragment() {
+
+    @Inject
+    lateinit var networkConnectionUtil: NetworkConnectionUtil
 
     //Binding view
     protected lateinit var viewBinding: ViewBinding
@@ -24,6 +30,18 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     //LayoutId of screen, example R.layout.screen
     @get:LayoutRes
     protected abstract val layoutId: Int
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        if (::networkConnectionUtil.isInitialized) {
+            networkConnectionUtil.connectionResult = { connectionType ->
+                when (connectionType) {
+                    ConnectionType.CONNECTED -> haveInternetConnectionBack()
+                    ConnectionType.DISCONNECTED -> lostInternetConnection()
+                }
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,5 +57,13 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
             }
         }
         return viewBinding.root
+    }
+
+    //Do something if internet connection is back
+    open fun haveInternetConnectionBack() {
+    }
+
+    //Do something if internet connection is lost
+    open fun lostInternetConnection() {
     }
 }

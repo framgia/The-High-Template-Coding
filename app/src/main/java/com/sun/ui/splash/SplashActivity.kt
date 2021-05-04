@@ -19,6 +19,7 @@ class SplashActivity: BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        networkConnectionUtil.registerNetworkCallListener()
         startApplication()
     }
 
