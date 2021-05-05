@@ -2,13 +2,11 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
 import 'package:{{cookiecutter.flutter_package_name}}/data/repository/repository.dart';
 import 'package:{{cookiecutter.flutter_package_name}}/models/user.dart';
 import 'package:{{cookiecutter.flutter_package_name}}/utils/utils.dart';
 
 part 'authentication_event.dart';
-
 part 'authentication_state.dart';
 
 class AuthenticationBloc extends Bloc<AuthenticationEvent, AuthenticationState> {

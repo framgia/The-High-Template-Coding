@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 
 abstract class BaseState extends Equatable {
   const BaseState();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class InitState extends BaseState {
@@ -19,26 +18,26 @@ class LoadingState extends BaseState {
 class LoadedState<T> extends BaseState {
   final T data;
 
-  const LoadedState({@required this.data}) : assert(data != null);
+  const LoadedState({required this.data}) : assert(data != null);
 
   @override
-  List<Object> get props => [data];
+  List<Object?> get props => [data];
 }
 
 class ErrorState<T> extends BaseState {
   final T data;
 
-  const ErrorState({@required this.data}) : assert(data != null);
+  const ErrorState({required this.data}) : assert(data != null);
 
   @override
-  List<Object> get props => [data];
+  List<Object?> get props => [data];
 }
 
 class InputState<T> extends BaseState {
-  final T data;
+  final T? data;
 
   const InputState({this.data});
 
   @override
-  List<Object> get props => [data];
+  List<Object?> get props => [data];
 }

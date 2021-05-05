@@ -5,7 +5,7 @@ import 'package:{{cookiecutter.flutter_package_name}}/utils/locator.dart';
 class HomeBloc extends BaseBloc {
   final HomeRepository homeRepository;
 
-  HomeBloc({HomeRepository homeRepository})
+  HomeBloc({HomeRepository? homeRepository})
       : this.homeRepository = homeRepository ?? locator<HomeRepository>(),
         super(InitState());
 

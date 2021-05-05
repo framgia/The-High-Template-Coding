@@ -1,6 +1,6 @@
 part of 'register_cubit.dart';
 
-class RegisterState {
+class RegisterState extends Equatable{
   final Map<String, dynamic> registerData;
 
   final BaseState status;
@@ -14,8 +14,8 @@ class RegisterState {
   List<Object> get props => [registerData, status.toString()];
 
   RegisterState copyWith({
-    Map<String, dynamic> registerData,
-    BaseState status,
+    Map<String, dynamic>? registerData,
+    BaseState? status,
   }) {
     return RegisterState(
       registerData: {...this.registerData, ...?registerData},

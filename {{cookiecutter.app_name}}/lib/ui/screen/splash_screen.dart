@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenSate extends State<SplashScreen> {
   final int duration = 1;
-  Timer timer;
+  Timer? timer;
 
   void startTime() async {
     timer?.cancel();

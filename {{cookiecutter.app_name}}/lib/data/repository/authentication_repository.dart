@@ -23,18 +23,18 @@ class AuthenticationRepository {
   Future<Response> login(Map<String, dynamic> request) async {
     //dummy response
     await Future.delayed(Duration(seconds: 3));
-    return Response(data: request);
+    return Response(data: request, requestOptions: RequestOptions(path: ""));
   }
 
   Future<Response> register(Map<String, dynamic> request) async {
     //dummy response
     await Future.delayed(Duration(seconds: 3));
-    return Response(data: request);
+    return Response(data: request, requestOptions: RequestOptions(path: ""));
   }
 
-  Future<Response> forgetPassword(String email) async {
+  Future<Response> forgetPassword(String? email) async {
     //dummy response
     await Future.delayed(Duration(seconds: 3));
-    return Response(data: true);
+    return Response(data: true, requestOptions: RequestOptions(path: ""));
   }
 }

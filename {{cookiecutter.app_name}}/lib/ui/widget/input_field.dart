@@ -1,26 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/resources/resource.dart';
 
 class InputField extends StatefulWidget {
-  final String hint;
-  final double width;
-  final Widget label;
-  final Function(String value) onChanged;
-  final Function(String value) onSubmitted;
-  final String defaultValue;
+  final String? hint;
+  final double? width;
+  final Widget? label;
+  final Function(String value)? onChanged;
+  final Function(String value)? onSubmitted;
+  final String? defaultValue;
   final bool isPassword;
   final double borderRadius;
-  final TextInputType textInputType;
-  final List<TextInputFormatter> inputFormatters;
-  final Widget prefixIcon;
-  final Widget suffix;
-  final TextInputAction textInputAction;
-  final int maxLength;
-  final String errorText;
-  final Function(String value) validator;
+  final TextInputType? textInputType;
+  final List<TextInputFormatter>? inputFormatters;
+  final Widget? prefixIcon;
+  final Widget? suffix;
+  final TextInputAction? textInputAction;
+  final int? maxLength;
+  final String? errorText;
+  final Function(String value)? validator;
 
   const InputField({
-    Key key,
+    Key? key,
     this.hint,
     this.width,
     this.label,
@@ -46,8 +47,8 @@ class InputField extends StatefulWidget {
 }
 
 class _InputFieldState extends State<InputField> {
-  TextEditingController controller;
-  bool isValid;
+  TextEditingController? controller;
+  bool isValid = true;
 
   @override
   void initState() {
@@ -62,24 +63,24 @@ class _InputFieldState extends State<InputField> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         if (widget.label != null) ...[
-          widget.label,
-          SizedBox(height: 10),
+          widget.label!,
+          SizedBox(height: Sizes.size_10),
         ],
         Container(
           width: widget.width,
-          margin: EdgeInsets.all(8),
+          margin: EdgeInsets.all(Sizes.size_8),
           decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(widget.borderRadius),
-              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 8)]),
+              boxShadow: [BoxShadow(color: Colors.black12, blurRadius: Sizes.size_8)]),
           child: TextFormField(
             maxLines: 1,
             controller: controller,
             onChanged: (value) {
-              if (widget.onChanged != null) widget.onChanged(value);
+              if (widget.onChanged != null) widget.onChanged!(value);
               if (widget.validator != null){
                 setState(() {
-                  isValid = widget.validator(value);
+                  isValid = widget.validator!(value);
                 });
               }
 
@@ -94,12 +95,12 @@ class _InputFieldState extends State<InputField> {
               hintText: widget.hint,
               isDense: true,
               contentPadding: EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 10,
+                horizontal: Sizes.size_16,
+                vertical: Sizes.size_10,
               ),
               border: InputBorder.none,
               prefixIcon: widget.prefixIcon,
-              prefixIconConstraints: BoxConstraints(minWidth: 40, maxHeight: 32),
+              prefixIconConstraints: BoxConstraints(minWidth: Sizes.size_40, maxHeight: Sizes.size_32),
               suffixIcon: widget.suffix,
               suffixIconConstraints: BoxConstraints(minWidth: 0, minHeight: 0),
               counterText: "",
@@ -108,12 +109,12 @@ class _InputFieldState extends State<InputField> {
             onFieldSubmitted: widget.onSubmitted,
           ),
         ),
-        if (widget.errorText != null && isValid == false)
+        if (widget.errorText != null && !isValid)
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+            padding: const EdgeInsets.symmetric(horizontal: Sizes.size_24),
             child: Text(
-              widget.errorText,
-              style: TextStyle(fontSize: 12, color: Colors.red),
+              widget.errorText!,
+              style: TextStyle(fontSize: Sizes.size_12, color: Colors.red),
             ),
           )
       ],
