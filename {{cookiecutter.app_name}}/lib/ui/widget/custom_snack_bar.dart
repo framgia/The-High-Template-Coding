@@ -5,16 +5,18 @@ class CustomSnackBar {
 
   CustomSnackBar.of(this.context);
 
-  void show(String message) {
+  Future<void> show(String message) async {
     try {
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-            content: Text(
-              message,
-              style: TextStyle(color: Colors.white),
-            ),
-            backgroundColor: Colors.lightBlue),
-      );
+      await ScaffoldMessenger.of(context)
+          .showSnackBar(
+            SnackBar(
+                content: Text(
+                  message,
+                  style: TextStyle(color: Colors.white),
+                ),
+                backgroundColor: Colors.lightBlue),
+          )
+          .closed;
     } catch (e) {
       print('Error - showSnackBar: $e');
     }

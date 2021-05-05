@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-extension ScreenUtils on BuildContext {
+extension ContextUtils on BuildContext {
   double getSafeHeight() {
     double height = MediaQuery.of(this).size.height;
     var padding = MediaQuery.of(this).padding;
@@ -15,5 +15,12 @@ extension ScreenUtils on BuildContext {
   double getHeight() {
     double height = MediaQuery.of(this).size.height;
     return height;
+  }
+
+  void unfocus() {
+    var currentFocus = FocusScope.of(this);
+    if (!currentFocus.hasPrimaryFocus) {
+      currentFocus.focusedChild?.unfocus();
+    }
   }
 }

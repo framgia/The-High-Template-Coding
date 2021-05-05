@@ -1,14 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreManager {
-  SharedPreferences _preferences;
+  SharedPreferences? _preferences;
 
   Future<SharedPreferences> get getPreferences async {
     _preferences ??= await SharedPreferences.getInstance();
-    return _preferences;
+    return _preferences!;
   }
 
   Future write<T>(String key, dynamic value) async {

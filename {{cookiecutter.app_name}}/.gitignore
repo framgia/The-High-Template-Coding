@@ -124,3 +124,6 @@ fastlane
 *.ipa
 
 gcf/node_modules
+
+#l10n
+lib/generated/

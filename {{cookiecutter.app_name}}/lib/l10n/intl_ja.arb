@@ -1,0 +1,14 @@
+{
+  "email": "メール",
+  "email_invalid": "メールが無効です",
+  "password": "パスワード",
+  "password_invalid": "パスワードが無効です",
+  "confirm_password": "パスワードの確認",
+  "confirm_password_invalid": "パスワードが無効であることを確認してください",
+  "register": "登録",
+  "login": "ログイン",
+  "have_account": "アカウントをお持ちですか？ログイン",
+  "forget_password": "パスワードを忘れましたか？",
+  "check_mail": "メールをチェックしてください!",
+  "submit": "送信"
+}

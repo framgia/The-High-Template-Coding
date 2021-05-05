@@ -11,8 +11,8 @@ main() {
   final dynamic errorData = "Data error";
 
   group("HomeBloc", () {
-    HomeBloc homeBloc;
-    MockHomeRepository repository;
+    late HomeBloc homeBloc;
+    late MockHomeRepository repository;
     setUp(() {
       repository = MockHomeRepository();
       homeBloc = HomeBloc(homeRepository: repository);
@@ -31,7 +31,7 @@ main() {
           return homeBloc;
         },
         act: (bloc) => bloc.add(GetData()),
-        expect: [LoadingState(), LoadedState<String>(data: successData)],
+        expect: () => [LoadingState(), LoadedState<String>(data: successData)],
       );
       blocTest<HomeBloc, BaseState>(
         "emits [LoadingState, ErrorState] when GetData failure",
@@ -40,7 +40,7 @@ main() {
           return homeBloc;
         },
         act: (bloc) => bloc.add(GetData()),
-        expect: [LoadingState(), ErrorState(data: errorData)],
+        expect: () => [LoadingState(), ErrorState(data: errorData)],
       );
     });
   });

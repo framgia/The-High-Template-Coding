@@ -1,14 +1,14 @@
 import 'package:equatable/equatable.dart';
-import 'package:validators/validators.dart';
+import 'package:sample/utils/utils.dart';
 
 class User extends Equatable {
-  String email;
-  String password;
+  final String? email;
+  final String? password;
 
   User({this.email, this.password});
 
   @override
-  List<Object> get props => [email, password];
+  List<Object?> get props => [email, password];
 
   @override
   String toString() {
@@ -16,8 +16,8 @@ class User extends Equatable {
   }
 
   User copy({
-    String email,
-    String password,
+    String? email,
+    String? password,
   }) {
     return User(email: email ?? this.email, password: password ?? this.password);
   }
@@ -36,7 +36,7 @@ class User extends Equatable {
     );
   }
 
-  get isValidEmail => isEmail(email);
+  get isValidEmail => Validators.isValidEmail(email);
 
-  get isValidPassword => password != null && password.length >= 6;
+  get isValidPassword => Validators.isValidPassword(password);
 }
