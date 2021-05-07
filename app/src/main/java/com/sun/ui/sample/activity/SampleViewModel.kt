@@ -6,6 +6,7 @@ import com.sun.data.repository.SampleRepository
 import com.sun.ui.base.BaseViewModel
 import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.sun.extensions.tryCatch
 import com.sun.extensions.tryCatchWithResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
@@ -22,33 +23,44 @@ class SampleViewModel @Inject constructor(
     }
 
     /**
-     * Get data from api, using executeTask function to handle exception
-     * Exception is thrown on onLoadFail(throwable: Throwable)
+     * Get data from api, using [executeNetWorkTask]
+     * if successful callback onSuccess will be called,
+     * otherwise onError will be called
      */
     private fun getPosts() {
-        executeTask { posts.postValue(repository.getPosts()) }
+        executeNetWorkTask(action = {
+            repository.getPosts()
+        }, onSuccess = {
+            //This block is CoroutinesScope using dispatcher as IO,
+            //you should use postValue instead of setValue for LiveData,
+            posts.postValue(it)
+            //because it's a CoroutinesScope, you can do many things like
+            //accessing local database, read file,...
+        }, onError = {
+            errorMessage.postValue(it)
+        })
     }
 
     /**
-     * If you want to perform multiple tasks in parallel use [tryCatchWithResult] for each task and
-     * you must set your [coroutineScope] and handle the exception for each task manually
-     * [tryCatchWithResult] did it for you
+     * If you want to perform multiple tasks in parallel use [tryCatchWithResult] or [tryCatch]
+     * for each task and you must set your [coroutineScope] and handle the exception for each task manually
+     * [tryCatchWithResult] or [tryCatch] did it for you
      * [coroutineScope] helps other coroutines run normally if there is a coroutine throw exception
      */
     private fun executeMultiTaskParallel() {
         viewModelScope.launch {
             coroutineScope {
                 val firstTaskResult = tryCatchWithResult({
-                    repository.getPosts()
+                    //Do task here
+
                 }, {
                     //Handle error here
                     onLoadFail(it)
                     //Default value when error
-                    emptyList()
+
                 })
 
-                //Do something with firstTaskResult variables
-                posts.postValue(firstTaskResult)
+                //Do something with firstTaskResult value
             }
         }
     }
