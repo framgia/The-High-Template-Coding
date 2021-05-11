@@ -10,6 +10,18 @@
             name="post"
             type="com.sun.data.model.Post" />
 
+        <variable
+            name="item"
+            type="com.sun.data.model.Repo" />
+
+        <variable
+            name="position"
+            type="java.lang.Integer" />
+
+        <variable
+            name="listener"
+            type="com.sun.ui.sample.activity.RepoListener" />
+
     </data>
 
     <LinearLayout
@@ -17,22 +29,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_4"
         android:layout_marginBottom="@dimen/dp_4"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/userId"
-            style="@android:style/TextAppearance.Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{Html.fromHtml(@string/format_content(`userId`, post.userId + ``))}"
-            tools:text="userId" />
+        android:orientation="vertical"
+        android:onClick="@{v -> listener.onRepoItemClicked(item, position)}">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/id"
             style="@android:style/TextAppearance.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{Html.fromHtml(@string/format_content(`id`, post.id + ``))}"
+            android:text="@{Html.fromHtml(@string/format_content(`id`, item.id + ``))}"
             tools:text="id" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -40,15 +45,7 @@
             style="@android:style/TextAppearance.Medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{Html.fromHtml(@string/format_content(`title`, post.title))}"
+            android:text="@{Html.fromHtml(@string/format_content(`title`, item.name))}"
             tools:text="title" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/body"
-            style="@android:style/TextAppearance.Medium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{Html.fromHtml(@string/format_content(`body`, post.body))}"
-            tools:text="body" />
     </LinearLayout>
 </layout>

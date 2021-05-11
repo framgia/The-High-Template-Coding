@@ -8,9 +8,14 @@
         <variable
             name="viewModel"
             type="com.sun.ui.sample.activity.SampleViewModel" />
+
+        <variable
+            name="adapter"
+            type="androidx.recyclerview.widget.ConcatAdapter" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/layout_swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="@dimen/dp_16"
@@ -18,14 +23,15 @@
         tools:context=".ui.sample.activity.SampleActivity">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvPosts"
+            android:id="@+id/rv_posts"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:adapter="@{adapter}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

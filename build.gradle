@@ -22,6 +22,8 @@ buildscript {
         nav_version = '2.3.0'
         firebase_bom_version = '26.8.0'
         firebase_crashlytics_gradle_version = '2.5.2'
+        paging_version = '3.0.0-beta02'
+        swipe_to_refresh_version = '1.1.0'
 
         // Fragment Ktx
         fragment_ktx = "androidx.fragment:fragment-ktx:$fragment_ktx_version"
@@ -63,6 +65,12 @@ buildscript {
         firebase_messaging = 'com.google.firebase:firebase-messaging-ktx'
         firebase_analytics = 'com.google.firebase:firebase-analytics-ktx'
         firebase_crashlytics = 'com.google.firebase:firebase-crashlytics-ktx'
+
+        // Paging 3
+        paging_lib = "androidx.paging:paging-runtime:$paging_version"
+
+        // Swipe to refresh
+        swipe_to_refresh = "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_to_refresh_version"
     }
     repositories {
         google()

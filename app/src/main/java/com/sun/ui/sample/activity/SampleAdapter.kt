@@ -7,7 +7,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DiffUtil
 import com.sun.R
 import com.sun.data.model.Post
-import com.sun.databinding.AdapterItemPostBinding
+import com.sun.databinding.ItemPostBinding
 import com.sun.ui.base.BaseRecyclerAdapter
 
 class SampleAdapter(private val callback: ((Post) -> Unit)?) :
@@ -16,11 +16,11 @@ class SampleAdapter(private val callback: ((Post) -> Unit)?) :
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean =
-            oldItem.body == newItem.body
+            oldItem == newItem
     }) {
     override fun createBinding(parent: ViewGroup, viewType: Int?): ViewDataBinding =
-        DataBindingUtil.inflate<AdapterItemPostBinding>(
-            LayoutInflater.from(parent.context), R.layout.adapter_item_post, parent, false
+        DataBindingUtil.inflate<ItemPostBinding>(
+            LayoutInflater.from(parent.context), R.layout.item_post, parent, false
         ).apply {
             root.setOnClickListener {
                 this.post?.let { item ->
@@ -30,6 +30,6 @@ class SampleAdapter(private val callback: ((Post) -> Unit)?) :
         }
 
     override fun bind(binding: ViewDataBinding, item: Post) {
-        if (binding is AdapterItemPostBinding) binding.post = item
+        if (binding is ItemPostBinding) binding.post = item
     }
 }

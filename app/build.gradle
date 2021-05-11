@@ -59,7 +59,7 @@ android {
         develop {
             versionNameSuffix = "-dev"
             applicationIdSuffix = ".dev"
-            buildConfigField "String", URL_END_POINT, '"https://jsonplaceholder.typicode.com/"'
+            buildConfigField "String", URL_END_POINT, '"https://api.github.com/"'
         }
         staging {
             versionNameSuffix = "-staging"
@@ -133,4 +133,10 @@ dependencies {
     implementation firebase_messaging
     implementation firebase_analytics
     implementation firebase_crashlytics
+
+    // Paging 3
+    implementation paging_lib
+
+    // Swipe To Refresh
+    implementation swipe_to_refresh
 }
