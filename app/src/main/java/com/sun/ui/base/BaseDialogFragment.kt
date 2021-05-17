@@ -21,9 +21,6 @@ abstract class BaseDialogFragment<ViewBinding : ViewDataBinding, ViewModel : Bas
     //ViewModel using in screen
     protected abstract val viewModel: ViewModel
 
-    //Variable is declare on binding view, example BR.viewModel
-    protected abstract val bindingVariable: Int
-
     //LayoutId of screen, example R.layout.screen
     @get:LayoutRes
     protected abstract val layoutId: Int
@@ -36,7 +33,6 @@ abstract class BaseDialogFragment<ViewBinding : ViewDataBinding, ViewModel : Bas
         if (::viewBinding.isInitialized.not()) {
             viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
             viewBinding.apply {
-                setVariable(bindingVariable, viewModel)
                 root.isClickable = true
                 lifecycleOwner = viewLifecycleOwner
                 executePendingBindings()
