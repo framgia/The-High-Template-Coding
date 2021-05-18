@@ -25,8 +25,8 @@ class SplashActivity: BaseActivity<ActivitySplashBinding, SplashViewModel>() {
 
     private fun startApplication() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_splash_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
-        navController.navigateWithAnim(R.id.openSample)
+        navController = navHostFragment.navController
+        navController?.navigateWithAnim(R.id.openSample)
         finish()
     }
 
