@@ -28,6 +28,7 @@ platform :android do
   lane :distributeDevDebug do
     gradle(task: 'clean' )
     gradle(task: 'assemble', flavor: "Develop", build_type: 'Debug')
+    jacoco_gradle(flavor: "Develop")
     writeReleaseNote()
     buildApk(releaseNote:releaseNoteInput, id:ENV['FIREBASE_APP_ID_DEV'])
     notifyCW(flavor:"Develop Debug")
@@ -38,6 +39,7 @@ platform :android do
   lane :distributeStagingDebug do
     gradle(task: 'clean' )
     gradle(task: 'assemble', flavor: "Staging", build_type: 'Debug')
+    jacoco_gradle(flavor: "Staging")
     writeReleaseNote()
     buildApk(releaseNote:releaseNoteInput, id:ENV['FIREBASE_APP_ID_STAGING'])
     notifyCW(flavor:"Staging Debug")
@@ -48,6 +50,7 @@ platform :android do
   lane :distributeProductDebug do
     gradle(task: 'clean' )
     gradle(task: 'assemble', flavor: "Product", build_type: 'Debug')
+    jacoco_gradle(flavor: "Product")
     writeReleaseNote()
     buildApk(releaseNote:releaseNoteInput, id:ENV['FIREBASE_APP_ID_PRODUCT'])
     notifyCW(flavor:"Product Debug")
