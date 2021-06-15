@@ -5,18 +5,19 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+apply from: '../jacoco.gradle'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.sun"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -25,7 +26,6 @@ android {
 
     signingConfigs {
         debug {
-
         }
 
         release {
@@ -42,6 +42,7 @@ android {
     buildTypes {
         debug {
             debuggable true
+            testCoverageEnabled true
         }
 
         release {
@@ -99,8 +100,11 @@ dependencies {
     implementation fragment_ktx
     implementation constraint_layout
     implementation recycler_view
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
+
+    testImplementation assertJ
+    testImplementation mockk
+    testImplementation mockWebServer
+    androidTestImplementation mockkAndroid
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 
     //Hilt
