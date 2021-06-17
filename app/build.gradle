@@ -6,17 +6,18 @@ apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply from: '../jacoco.gradle'
+apply from: 'autodimen.gradle.kts'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.sun"
-        minSdkVersion 21
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -72,8 +73,9 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
 
     compileOptions {
@@ -90,6 +92,13 @@ android {
         exclude 'META-INF/LGPL2.1'
     }
 
+}
+
+tasks {
+    clean {
+        dependsOn("createDimen")
+        mustRunAfter("createDimen")
+    }
 }
 
 dependencies {
