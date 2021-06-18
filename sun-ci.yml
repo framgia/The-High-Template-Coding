@@ -1,0 +1,25 @@
+workspace: true
+
+stages:
+  - lint
+
+jobs:
+  - name: Lint checking
+    stage: lint
+    image: androidsdk/android-29:latest
+    cache:
+      - key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+        paths:
+          - ./gradle
+    before_script:
+      - chmod +x ./gradlew
+    script:
+      - ./gradlew lint testDevelopDebugUnitTestCoverage
+    artifacts:
+      paths:
+        - app/build/reports
+        - app/build/test-results
+      expires_in: 3 days
+    only:
+      branches:
+        - android-draft
