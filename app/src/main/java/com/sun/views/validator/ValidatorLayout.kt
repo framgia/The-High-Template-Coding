@@ -7,16 +7,13 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.children
 
-class ValidatorLayout: ConstraintLayout {
+class ValidatorLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int
+) : ConstraintLayout(context, attrs, defStyleAttr) {
 
     private val validatorView = mutableListOf<ValidatorView>()
-    constructor(context: Context): super(context)
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs)
-    constructor(
-        context: Context,
-        attrs: AttributeSet?,
-        defStyleAttr: Int
-    ): super(context, attrs, defStyleAttr)
 
     init {
         Handler().postDelayed(
@@ -26,17 +23,22 @@ class ValidatorLayout: ConstraintLayout {
     }
 
     private fun getValidator(container: ViewGroup) {
+        var password: ValidatorEditText? = null
         container.children.forEach {
             when (it) {
                 is ValidatorView -> {
+                    if (it is ValidatorEditText) {
+                        if (it.validator == ValidatorEditText.Type.PASSWORD.value) password = it
+                        if (it.validator == ValidatorEditText.Type.CONFIRM_PASSWORD.value) {
+                            it.textPassword = password
+                        }
+                    }
                     validatorView.add(it)
                 }
                 is ValidatorButton -> {
                     it.validator = ::validate
                 }
-                is ViewGroup -> {
-                    getValidator(it)
-                }
+                is ViewGroup -> getValidator(it)
             }
         }
     }

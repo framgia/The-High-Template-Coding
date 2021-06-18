@@ -10,42 +10,25 @@ import android.widget.FrameLayout
 import com.sun.R
 import com.sun.common.Constant
 import com.sun.databinding.UiValidatorEditTextBinding
-import com.sun.extensions.isValidPassword
 import com.sun.extensions.isEmail
+import com.sun.extensions.isValidPassword
 
-class ValidatorEditText: FrameLayout, ValidatorView {
+class ValidatorEditText @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int
+) : FrameLayout(context, attrs, defStyleAttr), ValidatorView {
 
-    private val contentView = UiValidatorEditTextBinding.inflate(LayoutInflater.from(context), this, true)
-    private enum class Type(val value: Int) {
-        EMPTY(0), EMAIL(1), PASSWORD(2), CONFIRM_PASSWORD(3)
-    }
+    private val contentView =
+        UiValidatorEditTextBinding.inflate(LayoutInflater.from(context), this, true)
 
     var validator = Constant.VALUE_DEFAULT_INVALID
     var text: String
         set(value) = contentView.textContent.setText(value)
         get() = contentView.textContent.text.toString().trim()
-    var textConfirmPassword: ValidatorEditText? = null
+    var textPassword: ValidatorEditText? = null
 
-    constructor(context: Context): super(context)
-
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs) {
-        readAttrs(attrs)
-    }
-
-    constructor(
-        context: Context,
-        attrs: AttributeSet?,
-        defStyleAttr: Int
-    ): super(context, attrs, defStyleAttr) {
-        readAttrs(attrs)
-    }
-
-    constructor(
-        context: Context,
-        attrs: AttributeSet?,
-        defStyleAttr: Int,
-        defStyleRes: Int
-    ): super(context, attrs, defStyleAttr, defStyleRes) {
+    init {
         readAttrs(attrs)
     }
 
@@ -56,12 +39,16 @@ class ValidatorEditText: FrameLayout, ValidatorView {
         contentView.isVisible = false
         attrs?.let {
             val arr = context.resources.obtainAttributes(attrs, R.styleable.ValidatorEditText)
-            validator = arr.getInt(R.styleable.ValidatorEditText_validator, Constant.VALUE_DEFAULT_INVALID)
+            validator =
+                arr.getInt(R.styleable.ValidatorEditText_validator, Constant.VALUE_DEFAULT_INVALID)
             contentView.textContent.apply {
                 inputType = if (validator == Type.EMAIL.value) {
                     EditorInfo.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
                 } else {
-                    arr.getInt(R.styleable.ValidatorEditText_android_inputType, InputType.TYPE_CLASS_TEXT)
+                    arr.getInt(
+                        R.styleable.ValidatorEditText_android_inputType,
+                        InputType.TYPE_CLASS_TEXT
+                    )
                 }
             }
             arr.recycle()
@@ -103,7 +90,7 @@ class ValidatorEditText: FrameLayout, ValidatorView {
                     isCorrect
                 }
                 Type.CONFIRM_PASSWORD.value -> {
-                    val textPassword = textConfirmPassword?.text
+                    val textPassword = textPassword?.text
                     isCorrect = isValidPassword()
                     if (isCorrect.not()) {
                         contentView.textError.text = "Error: Password invalid!"
@@ -118,5 +105,9 @@ class ValidatorEditText: FrameLayout, ValidatorView {
                 else -> true
             }
         }
+    }
+
+    enum class Type(val value: Int) {
+        EMPTY(0), EMAIL(1), PASSWORD(2), CONFIRM_PASSWORD(3)
     }
 }

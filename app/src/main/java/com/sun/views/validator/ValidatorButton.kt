@@ -5,19 +5,13 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatButton
 import kotlin.reflect.KFunction0
 
-class ValidatorButton: AppCompatButton {
+class ValidatorButton @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int
+) : AppCompatButton(context, attrs, defStyleAttr) {
 
     var validator: KFunction0<Boolean>? = null
-
-    constructor(context: Context): super(context)
-
-    constructor(context: Context, attrs: AttributeSet?): super(context, attrs)
-
-    constructor(
-        context: Context,
-        attrs: AttributeSet?,
-        defStyleAttr: Int
-    ): super(context, attrs, defStyleAttr)
 
     override fun setOnClickListener(l: OnClickListener?) {
         super.setOnClickListener {
