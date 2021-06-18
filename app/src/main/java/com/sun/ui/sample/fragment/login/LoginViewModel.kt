@@ -1,9 +1,9 @@
-package com.sun.ui.sample.activity
+package com.sun.ui.sample.fragment.login
 
 import com.sun.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class SampleViewModel @Inject constructor() : BaseViewModel() {
+class LoginViewModel @Inject constructor() : BaseViewModel() {
 }

@@ -17,11 +17,6 @@
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
-<!--    <fragment-->
-<!--        android:id="@+id/registerFragment"-->
-<!--        android:name="com.sun.ui.sample.fragment.RegisterFragment"-->
-<!--        android:label="RegisterFragment" />-->
-
     <activity
         android:id="@+id/sampleActivity"
         android:name="com.sun.ui.sample.activity.SampleActivity"

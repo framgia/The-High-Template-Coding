@@ -8,19 +8,24 @@ import com.sun.ui.base.BaseActivity
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import com.sun.extensions.navigateWithAnim
+import com.sun.utils.ConnectionType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SplashActivity: BaseActivity<ActivitySplashBinding, SplashViewModel>() {
-    override val viewModel: SplashViewModel by viewModels()
 
-    override val layoutId: Int
-        get() = R.layout.activity_splash
+    override val viewModel: SplashViewModel by viewModels()
+    override val layoutId: Int = R.layout.activity_splash
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         networkConnectionUtil.registerNetworkCallListener()
-        startApplication()
+        networkConnectionUtil.connectionResult = { connectionType ->
+            when (connectionType) {
+                ConnectionType.CONNECTED -> startApplication()
+                ConnectionType.DISCONNECTED -> Unit
+            }
+        }
     }
 
     private fun startApplication() {
