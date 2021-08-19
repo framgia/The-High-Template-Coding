@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/resources/resource.dart';
 
 class CustomCircleIndicator extends StatelessWidget {
   final double size;
@@ -6,9 +7,9 @@ class CustomCircleIndicator extends StatelessWidget {
   final Color color;
 
   const CustomCircleIndicator({
-    Key key,
-    this.size = 24,
-    this.strokeWidth = 2,
+    Key? key,
+    this.size = Sizes.size_24,
+    this.strokeWidth = Sizes.size_2,
     this.color = Colors.white,
   }) : super(key: key);
 

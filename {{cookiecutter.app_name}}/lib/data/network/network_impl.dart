@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 
 class Network {
   int _timeOut = 10000; //10s
-  Dio _dio;
+  late Dio _dio;
 
   Network() {
     BaseOptions options = BaseOptions(connectTimeout: _timeOut, receiveTimeout: _timeOut);
@@ -18,7 +18,7 @@ class Network {
     _dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
   }
 
-  Future<Response> get({String url, Map<String, dynamic> params = const {}}) async {
+  Future<Response?> get({required String url, Map<String, dynamic> params = const {}}) async {
     try {
       return await _dio.get(
         url,
@@ -27,12 +27,12 @@ class Network {
       );
     } on DioError catch (e) {
       //handle error
-      _handelError(e);
+      _handelError(e, url);
       print("DioError: ${e.toString()}");
     }
   }
 
-  Future<Response> post({String url, Map<String, dynamic> body = const {}}) async {
+  Future<Response?> post({required String url, Map<String, dynamic> body = const {}}) async {
     try {
       Response response = await _dio.post(
         url,
@@ -42,42 +42,52 @@ class Network {
       return response;
     } on DioError catch (e) {
       //handle error
-      _handelError(e);
       print("DioError: ${e.toString()}");
+      throw _handelError(e, url);
     }
   }
 
-  Response _handelError(dynamic error) {
+  Response _handelError(dynamic error, String url) {
     try {
       if (error is DioError) {
         switch (error.type) {
-          case DioErrorType.CANCEL:
-          case DioErrorType.CONNECT_TIMEOUT:
-          case DioErrorType.RECEIVE_TIMEOUT:
-          case DioErrorType.SEND_TIMEOUT:
-          case DioErrorType.DEFAULT:
+          case DioErrorType.cancel:
+          case DioErrorType.connectTimeout:
+          case DioErrorType.receiveTimeout:
+          case DioErrorType.sendTimeout:
+          case DioErrorType.other:
             if (error.error is SocketException) {
               return ErrorResponse(
                 data: error.error,
                 statusMessage: error.message,
                 statusCode: ErrorResponse.NETWORK_ERROR_CODE,
+                path: url,
               );
             }
-            return ErrorResponse(data: error.error, statusMessage: error.message);
-          case DioErrorType.RESPONSE:
             return ErrorResponse(
-              data: error.response.data,
-              statusMessage: error.response.statusMessage,
-              statusCode: error.response.statusCode,
+              data: error.error,
+              statusMessage: error.message,
+              path: url,
+            );
+          case DioErrorType.response:
+            return ErrorResponse(
+              data: error.response!.data,
+              statusMessage: error.response!.statusMessage,
+              statusCode: error.response!.statusCode,
+              path: url,
             );
           default:
-            return ErrorResponse(data: error.error, statusMessage: error.message);
+            return ErrorResponse(
+              data: error.error,
+              statusMessage: error.message,
+              path: url,
+            );
         }
       }
     } catch (ex) {
-      return ErrorResponse(data: ex.toString());
+      return ErrorResponse(data: ex.toString(), path: url);
     }
-    return ErrorResponse(data: error.toString());
+    return ErrorResponse(data: error.toString(), path: url);
   }
 }
 
@@ -86,11 +96,12 @@ class ErrorResponse extends Response {
 
   ErrorResponse({
     dynamic data,
-    int statusCode,
-    String statusMessage,
+    int? statusCode,
+    String? statusMessage,
+    required String path,
   }) : super(
-          data: data,
-          statusCode: statusCode,
-          statusMessage: statusMessage,
-        );
+            data: data,
+            statusCode: statusCode,
+            statusMessage: statusMessage,
+            requestOptions: RequestOptions(path: path));
 }

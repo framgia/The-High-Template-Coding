@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class MyObserver extends RouteObserver<PageRoute<dynamic>> {
-  Route currentRoute;
+  Route? currentRoute;
 
   _printLog(String message) {
     print('----------------Route Observer----------------');
@@ -12,7 +12,7 @@ class MyObserver extends RouteObserver<PageRoute<dynamic>> {
   }
 
   @override
-  void didPop(Route previousRoute, Route route) {
+  void didPop(Route route, Route? previousRoute) {
     super.didPop(route, previousRoute);
     if (route is PageRoute && previousRoute is PageRoute) {
       currentRoute = route;
@@ -21,7 +21,7 @@ class MyObserver extends RouteObserver<PageRoute<dynamic>> {
   }
 
   @override
-  void didPush(Route route, Route previousRoute) {
+  void didPush(Route route, Route? previousRoute) {
     super.didPush(route, previousRoute);
     if (route is PageRoute && previousRoute is PageRoute) {
       currentRoute = route;
@@ -30,7 +30,7 @@ class MyObserver extends RouteObserver<PageRoute<dynamic>> {
   }
 
   @override
-  void didRemove(Route route, Route previousRoute) {
+  void didRemove(Route route, Route? previousRoute) {
     super.didRemove(route, previousRoute);
     if (route is PageRoute && previousRoute is PageRoute) {
       currentRoute = route;
@@ -39,7 +39,7 @@ class MyObserver extends RouteObserver<PageRoute<dynamic>> {
   }
 
   @override
-  void didReplace({Route newRoute, Route oldRoute}) {
+  void didReplace({Route? newRoute, Route? oldRoute}) {
     super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
     if (newRoute is PageRoute && oldRoute is PageRoute) {
       currentRoute = newRoute;

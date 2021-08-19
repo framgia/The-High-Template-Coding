@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:{{cookiecutter.flutter_package_name}}/blocs/blocs.dart';
-import 'package:{{cookiecutter.flutter_package_name}}/localizations.dart';
+import 'package:{{cookiecutter.flutter_package_name}}/generated/l10n.dart';
 import 'package:{{cookiecutter.flutter_package_name}}/route_observer.dart';
 import 'package:{{cookiecutter.flutter_package_name}}/routes.dart';
 
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   final _navigationKey = GlobalKey<NavigatorState>();
   final _routeObserver = MyObserver();
 
-  NavigatorState get _navigator => _navigationKey.currentState;
+  NavigatorState? get _navigator => _navigationKey.currentState;
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +43,13 @@ class MyApp extends StatelessWidget {
           // ),
         ),
         localizationsDelegates: [
-          const LanguageDelegate(),
+          S.delegate,
           GlobalCupertinoLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
           DefaultCupertinoLocalizations.delegate
         ],
-        supportedLocales: [const Locale('ja', ''), const Locale('en', '')],
+        supportedLocales: S.delegate.supportedLocales,
         localeResolutionCallback: (locale, supportedLocales) => _localeCallback(locale, supportedLocales),
         initialRoute: Routes.initScreen,
         routes: Routes.routes,
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  Locale _localeCallback(Locale locale, Iterable<Locale> supportedLocales) {
+  Locale _localeCallback(Locale? locale, Iterable<Locale> supportedLocales) {
     if (locale == null) {
       return supportedLocales.first;
     }
@@ -73,6 +73,6 @@ class MyApp extends StatelessWidget {
   }
 
   void navigationPage(String nextPage) {
-    _navigator.pushNamedAndRemoveUntil(nextPage, (_) => false);
+    _navigator!.pushNamedAndRemoveUntil(nextPage, (_) => false);
   }
 }

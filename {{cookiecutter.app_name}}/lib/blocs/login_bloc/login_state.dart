@@ -14,8 +14,8 @@ class LoginState extends Equatable {
   List<Object> get props => [loginData, status.toString()];
 
   LoginState copyWith({
-    Map<String, dynamic> loginData,
-    BaseState status,
+    Map<String, dynamic>? loginData,
+    BaseState? status,
   }) {
     return LoginState(
       loginData: {...this.loginData, ...?loginData},

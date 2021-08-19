@@ -1,0 +1,14 @@
+{
+  "email": "Email",
+  "email_invalid": "Email invalid",
+  "password": "Password",
+  "password_invalid": "Password invalid",
+  "confirm_password": "Confirm password",
+  "confirm_password_invalid": "Confirm password invalid",
+  "register": "Register",
+  "login": "Login",
+  "have_account": "You have an account? Login",
+  "forget_password": "Forget password?",
+  "check_mail": "Please check your email!",
+  "submit": "SUBMIT"
+}

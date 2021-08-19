@@ -53,24 +53,23 @@ Enter *develop*, *staging* or *production* then you can run or build like other 
 
 ## Multi language
 Add supported locales. [Supported languages in flutter](https://github.com/flutter/flutter/tree/master/packages/flutter_localizations/lib/src/l10n)
+Install plugin [Flutter Intl](https://localizely.com/flutter-localization-workflow?utm_medium=ide_plugin&utm_source=androidstudio_readmore) (available on AndroidStudio, VScode)
 - In `app.dart`
 ```dart 
-supportedLocales: [const Locale('ja', ''), const Locale('en', '')]
+supportedLocales: S.delegate.supportedLocales
 ```
-- In `localizations.dart`
-```dart 
-bool isSupported(Locale locale) => ['en', 'ja'].contains(locale.languageCode);
-```
-- In assets/strings create json file contains translation. Example `en.json`
+- In lib/l10n create arb file contains translation. Example `intl_en.arb`. Or selecte Tools/Flutter Intl/Add Local
 ```json
    {
-     "example": "Example"
+      "email": "Email"
    }
 ```
 Use
 ```dart 
-Language.of(context).getText("example"); //==> Example
+S.current.email; //or S.of(context).email ==> Email
 ```
+
+Note : If plugin not auto-generate folder "generated", run command `flutter pub global run intl_utils:generate`
 ## Call api
 - GET:
 
@@ -152,7 +151,7 @@ class HomeBloc extends BaseBloc {
             builder: (context, state) {
               if (state is LoadingState) return CircularProgressIndicator();
               if (state is LoadedState) return Text(state.data);
-              return Text(Language.of(context).getText("example"));
+              return Text(S.current.email);
             },
           ),
         ),
