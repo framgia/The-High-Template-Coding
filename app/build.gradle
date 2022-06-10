@@ -5,18 +5,20 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+apply from: '../jacoco.gradle'
+apply from: 'autodimen.gradle.kts'
 
 def keystorePropertiesFile = rootProject.file("keystore.properties")
 def keystoreProperties = new Properties()
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.sun"
-        minSdkVersion 21
-        targetSdkVersion 29
+        minSdkVersion 24
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -25,7 +27,6 @@ android {
 
     signingConfigs {
         debug {
-
         }
 
         release {
@@ -42,6 +43,7 @@ android {
     buildTypes {
         debug {
             debuggable true
+            testCoverageEnabled true
         }
 
         release {
@@ -71,8 +73,9 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures {
+        viewBinding true
+        dataBinding true
     }
 
     compileOptions {
@@ -91,6 +94,13 @@ android {
 
 }
 
+tasks {
+    clean {
+        dependsOn("createDimen")
+        mustRunAfter("createDimen")
+    }
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation kotlin_lib
@@ -99,8 +109,11 @@ dependencies {
     implementation fragment_ktx
     implementation constraint_layout
     implementation recycler_view
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
+
+    testImplementation assertJ
+    testImplementation mockk
+    testImplementation mockWebServer
+    androidTestImplementation mockkAndroid
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_core_version"
 
     //Hilt
